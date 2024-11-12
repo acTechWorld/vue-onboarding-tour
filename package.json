@@ -1,7 +1,7 @@
 {
   "name": "@actechworld/vue-product-tour",
-  "version": "0.0.0",
-  "private": true,
+  "version": "0.0.1-beta.2",
+  "private": false,
   "type": "module",
   "scripts": {
     "dev": "vite",

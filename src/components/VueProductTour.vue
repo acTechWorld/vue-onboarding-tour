@@ -12,7 +12,7 @@
       :class="[targetElementVisible ? 'fixed' : 'hidden']"
       class="z-[9999]"
     >
-      <slot></slot>
+      <slot :currentStep="currentStep" :currentStepIndex="currentStepIndex"></slot>
       <div
         v-if="defaultTemplate"
         class="flex w-[312px] flex-col gap-4 rounded-lg bg-white px-4 py-2 shadow"
@@ -396,7 +396,7 @@ const scrollEventListener = () => {
   }
 }
 
-defineExpose({ startTour, endTour })
+defineExpose({ startTour, endTour, goNextStep, goPreviousStep, setStep })
 
 /** LIFECYCLE */
 onMounted(() => {
