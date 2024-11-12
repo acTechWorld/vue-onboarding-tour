@@ -1,7 +1,7 @@
 <template>
   <div
-    v-if="displayPromotionalPopin"
-    data-test="promotionalPopin"
+    v-if="displayProductTour"
+    data-test="productTour"
     :class="{ 'fixed z-[9999] h-full w-full': overlay }"
   >
     <div v-if="overlay" :style="styleOverlay"></div>
@@ -196,7 +196,7 @@ const isNextStepEnabled = computed(() => currentStepIndex.value < props.steps?.l
 
 const isPreviousStepEnabled = computed(() => currentStepIndex.value > 0)
 
-const displayPromotionalPopin = computed(
+const displayProductTour = computed(
   () => displayTour.value && props.steps && props.steps.length > 0 && targetElement.value,
 )
 
@@ -288,12 +288,12 @@ const setStep = (index: number) => {
 const validateStartTour = () => {
   if (props.endDate) {
     if (new Date() <= props.endDate) {
-      return !(props.cookieStorage && cookies.get(`promotional_popin_tour_${props.tourId}`))
+      return !(props.cookieStorage && cookies.get(`vue_product_tour_${props.tourId}`))
     } else {
       return false
     }
   } else {
-    return !(props.cookieStorage && cookies.get(`promotional_popin_tour_${props.tourId}`))
+    return !(props.cookieStorage && cookies.get(`vue_product_tour_${props.tourId}`))
   }
 }
 
@@ -317,7 +317,7 @@ const endTour = () => {
             return date
           })(),
     }
-    cookies.set(`promotional_popin_tour_${props.tourId}`, true, options)
+    cookies.set(`vue_product_tour_${props.tourId}`, true, options)
   }
   displayTour.value = false
   currentStepIndex.value = 0
@@ -383,7 +383,7 @@ const getTargetElement = () => {
 }
 
 const resizeEventListener = () => {
-  if (displayPromotionalPopin.value) {
+  if (displayProductTour.value) {
     getStyles()
 
     checkAutoScroll()
@@ -391,7 +391,7 @@ const resizeEventListener = () => {
 }
 
 const scrollEventListener = () => {
-  if (displayPromotionalPopin.value) {
+  if (displayProductTour.value) {
     getStyles()
   }
 }

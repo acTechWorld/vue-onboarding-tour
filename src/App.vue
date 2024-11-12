@@ -45,6 +45,12 @@ const configProductTour = {
 const productTourPoppin = ref(null)
 const displayDocSubMenu = ref(false)
 /** METHODS */
+const goToGithubPage = (hash: string) => {
+  window.open(
+    `https://github.com/acTechWorld/vue-product-tour/tree/develop?tab=readme-ov-file#${hash}`,
+  )
+}
+/** LIFECYCLE */
 onMounted(() => {
   productTourPoppin.value?.startTour()
 })
@@ -60,8 +66,18 @@ onMounted(() => {
           class="bg-purple-950/70 py-5 rounded-lg flex flex-col text-white absolute right-5 w-[220px] text-center"
           v-if="displayDocSubMenu"
         >
-          <p class="cursor-pointer hover:bg-purple-950 py-1">How to install</p>
-          <p class="cursor-pointer hover:bg-purple-950 py-1">Online Documentation</p>
+          <p
+            class="cursor-pointer hover:bg-purple-950 py-1"
+            @click="goToGithubPage('installation')"
+          >
+            How to install
+          </p>
+          <p
+            class="cursor-pointer hover:bg-purple-950 py-1"
+            @click="goToGithubPage('documentation')"
+          >
+            Online Documentation
+          </p>
           <p class="cursor-pointer hover:bg-purple-950 py-1">Storybook</p>
         </div>
       </div>
