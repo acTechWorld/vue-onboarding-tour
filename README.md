@@ -16,6 +16,12 @@
     - [endDate](#enddate)
     - [labelTerminate](#labelterminate)
     - [steps](#steps)
+  - [Exposed Methods](#exposed-methods)
+    - [startTour()](#starttour)
+    - [endTour()](#endtour)
+    - [goNextStep()](#gonextstep)
+    - [goPreviousStep()](#gopreviousstep)
+    - [setStep(index)](#setstepindex)
   - [Cookie Storage](#cookie-storage)
     - [What is Cookie Storage?](#what-is-cookie-storage)
     - [How does it work?](#how-does-it-work)
@@ -118,7 +124,7 @@ The `VueProductTour` component allows for creating an interactive, step-by-step 
   <VueProductTour :tourId="123" :steps="steps" :overlay="false" />
   ```
 
-### `startEvent`
+#### `startEvent`
 
 - **Type:** `String`
 - **Default:** `undefined`
@@ -209,7 +215,7 @@ In this example, the `ParentComponent` contains a button that triggers the `star
 
 - **Type:** `Date`
 - **Default:** `undefined`
-- **Description:** Sets an expiration date for the tour cookie, used when `cookieStorage` is enabled. After this date, the tour can be shown again to the user.
+- **Description:** The `endDate` prop allows you to set an expiration date for the tour. After this date, the tour will not be shown again, even if the cookie is not present. Additionally, all cookies set by this component (such as those used for `cookieStorage`) will have an expiration date equal to this `endDate`. As a result, these cookies will be automatically cleared from the user's browser once the expiration date is reached.
 
   **Usage:**
 
@@ -274,6 +280,70 @@ In this example, the `ParentComponent` contains a button that triggers the `star
   <VueProductTour :tourId="123" :steps="steps" />
   ```
 
+## Exposed Methods
+
+### `startTour()`
+
+**Purpose:**  
+Starts the product tour programmatically.
+
+**Usage:**  
+Trigger the tour when needed,
+
+e.g., after a button click or other user action.
+
+```javascript
+this.$refs.productTour.startTour()
+```
+
+### `endTour()`
+
+**Purpose:**  
+Ends the product tour programmatically.
+
+**Usage:**  
+Call this method to finish the tour prematurely.
+
+```javascript
+this.$refs.productTour.endTour()
+```
+
+### `goNextStep()`
+
+**Purpose:**  
+Moves to the next step of the tour.
+
+**Usage:**  
+Use this method to skip to the next tour step programmatically.
+
+```javascript
+this.$refs.productTour.goNextStep()
+```
+
+### `goPreviousStep()`
+
+**Purpose:**  
+Moves to the previous step of the tour.
+
+**Usage:**  
+Use this method to go back to the previous step in the tour.
+
+```javascript
+this.$refs.productTour.goPreviousStep()
+```
+
+### `setStep(index)`
+
+**Purpose:**  
+Sets the tour to a specific step based on its index.
+
+**Usage:**  
+Programmatically jump to a specific step.
+
+```javascript
+this.$refs.productTour.setStep(2) // Jumps to the third step
+```
+
 ## Cookie Storage
 
 ### What is Cookie Storage?
@@ -282,9 +352,9 @@ The `cookieStorage` prop allows you to persist the state of the tour using cooki
 
 ### How does it work?
 
-1. **Setting the Cookie:** When `cookieStorage` is enabled, a cookie with the name `vue-tour-{tourId}` is created. The value of the cookie is a JSON object that stores the date the tour was completed.
+1. **Setting the Cookie:** When `cookieStorage` is enabled, a cookie with the name `vue_product_tour_{tourId}` is created. The value of the cookie is a JSON object that stores the date the tour was completed.
 2. **Checking the Cookie:** On subsequent visits, the component checks if the cookie exists and whether the user has already completed the tour. If the cookie exists and is valid (not expired), the tour will not be shown again.
-3. **Expiration (Optional):** You can also set an expiration date for the cookie using the `endDate` prop. After this date, the cookie is no longer valid, and the tour will not be shown again to the user unless the cookie is cleared or the `endDate` is extended.
+3. **Expiration (Optional):** You can also set an expiration date for the tour. The `endDate` prop allows you to set an expiration date for the tour. After this date, the tour will not be shown again, even if the cookie is not present. Additionally, all cookies set by this component (such as those used for `cookieStorage`) will have an expiration date equal to this `endDate`. As a result, these cookies will be automatically cleared from the user's browser once the expiration date is reached.
 
 ### Cookie Format
 
@@ -318,4 +388,4 @@ To enable cookie storage and set an expiration date, you can use the following c
 In this example:
 
 - The `cookieStorage` prop is set to `true`, so a cookie will be stored when the tour is completed.
-- The `endDate` is set to January 1, 2025. After this date, the cookie will be considered expired
+- The `endDate` is set to January 1, 2025. After this date, the cookie will be considered expired, and the tour will no longer appear, regardless of the user's previous completion.
