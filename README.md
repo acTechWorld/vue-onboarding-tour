@@ -1,45 +1,74 @@
+Here's the **README.md** with an **Installation** and **Documentation** section:
+
+---
+
 # vue-product-tour
 
-This template should help get you started developing with Vue 3 in Vite.
+**vue-product-tour** is a lightweight and customizable product tour library for Vue.js applications. Quickly guide your users through key features and steps in your app with this easy-to-use tool.
 
-## Recommended IDE Setup
+## Table of Contents
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- [Installation](#installation)
+- [Documentation](#documentation)
 
-## Type Support for `.vue` Imports in TS
+## Installation
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+### Prerequisites
 
-## Customize configuration
+- **Vue.js** (Vue 2 or Vue 3) must be installed in your project.
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+### 1. Install the Package
 
-## Project Setup
+Using **npm**:
 
-```sh
-npm install
+```bash
+npm install @acTechWorld/vue-product-tour
 ```
 
-### Compile and Hot-Reload for Development
+Or, using **yarn**:
 
-```sh
-npm run dev
+```bash
+yarn add @acTechWorld/vue-product-tour
 ```
 
-### Type-Check, Compile and Minify for Production
+### 2. Import and Register the Library in Your Project
 
-```sh
-npm run build
+After installation, import **vue-product-tour** in your main JavaScript file and register it as a Vue plugin.
+
+#### For Vue 2:
+
+```javascript
+// main.js
+import Vue from 'vue'
+import App from './App.vue'
+import VueProductTour from '@acTechWorld/vue-product-tour'
+
+Vue.use(VueProductTour)
+
+new Vue({
+  render: (h) => h(App),
+}).$mount('#app')
 ```
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+#### For Vue 3:
 
-```sh
-npm run test:unit
+```javascript
+// main.js
+import { createApp } from 'vue'
+import App from './App.vue'
+import VueProductTour from '@acTechWorld/vue-product-tour'
+
+const app = createApp(App)
+app.use(VueProductTour)
+app.mount('#app')
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+## Documentation
 
-```sh
-npm run lint
-```
+The documentation for **vue-product-tour** will cover how to set up tours, configure steps, and customize options for your specific use case.
+
+_(Coming Soon)_
+
+---
+
+This README now has an **Installation** section filled with the setup instructions and an empty **Documentation** section as a placeholder for future content.

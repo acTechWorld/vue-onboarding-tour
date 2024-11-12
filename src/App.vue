@@ -43,6 +43,7 @@ const configProductTour = {
   ],
 }
 const productTourPoppin = ref(null)
+const displayDocSubMenu = ref(false)
 /** METHODS */
 onMounted(() => {
   productTourPoppin.value?.startTour()
@@ -51,12 +52,28 @@ onMounted(() => {
 
 <template>
   <main class="bg-black relative min-h-screen">
+    <nav class="flex float-end p-5 relative z-10">
+      <div @mouseenter="displayDocSubMenu = true" @mouseleave="displayDocSubMenu = false">
+        <div id="nav-doc" class="cursor-pointer text-purple-400 text-xl mb-2">Documentation</div>
+        <div
+          id="nav-doc-sub-container"
+          class="bg-purple-950/70 py-5 rounded-lg flex flex-col text-white absolute right-5 w-[220px] text-center"
+          v-if="displayDocSubMenu"
+        >
+          <p class="cursor-pointer hover:bg-purple-950 py-1">How to install</p>
+          <p class="cursor-pointer hover:bg-purple-950 py-1">Online Documentation</p>
+          <p class="cursor-pointer hover:bg-purple-950 py-1">Storybook</p>
+        </div>
+      </div>
+    </nav>
     <VueProductTour v-bind="configProductTour" ref="productTourPoppin" />
     <div class="lg:max-w-[1200px] mx-auto">
       <h1
-        class="title-product text-4xl md:text-5xl lg:text-6xl font-medium text-white text-balance py-2 text-center pt-[10rem]"
+        class="text-4xl md:text-5xl lg:text-6xl font-medium text-white text-balance py-2 text-center pt-[10rem]"
       >
-        VueProductTour – The Easiest Way to Guide Your Users in Your Vue App
+        <span class="title-product">
+          VueProductTour – The Easiest Way to Guide Your Users in Your Vue App
+        </span>
       </h1>
       <div class="mt-20">
         <div class="flex text-center gap-10">
