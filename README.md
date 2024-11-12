@@ -2,9 +2,10 @@ Here's the **README.md** with an **Installation** and **Documentation** section:
 
 ---
 
-# vue-product-tour
+# VueProductTour
 
-**vue-product-tour** is a lightweight and customizable product tour library for Vue.js applications. Quickly guide your users through key features and steps in your app with this easy-to-use tool.
+**VueProductTour** is a Vue.js component that creates guided, step-by-step product tours
+to help users navigate your app intuitively.
 
 ## Table of Contents
 
