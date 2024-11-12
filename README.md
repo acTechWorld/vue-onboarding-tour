@@ -146,10 +146,12 @@ To start the tour from a parent component, you can emit a custom event and pass 
       startEvent="showTour"
       labelTerminate="Finish Tour"
     />
+    <div id="step1"></div>
+    <div id="step2"></div>
   </div>
 </template>
 
-<script>
+<script lang="ts">
   export default {
     data() {
       return {
@@ -170,7 +172,7 @@ To start the tour from a parent component, you can emit a custom event and pass 
     methods: {
       startTour() {
         // Emit the custom event to start the tour
-        this.$emit('showTour')
+        window.dispatchEvent(new CustomEvent('showTour'))
       },
     },
   }
