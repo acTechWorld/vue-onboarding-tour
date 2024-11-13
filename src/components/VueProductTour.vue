@@ -4,71 +4,103 @@
     data-test="productTour"
     :class="{ 'fixed z-[9999] h-full w-full': overlay }"
   >
-    <div v-if="overlay" :style="styleOverlay"></div>
+    <!-- Overlay Background -->
+    <div v-if="overlay" :style="styleOverlay" data-test="overlay"></div>
 
+    <!-- Popup Container -->
     <div
       ref="popup"
       :style="stylePopup"
       :class="[targetElementVisible ? 'fixed' : 'hidden']"
       class="z-[9999]"
+      data-test="popupContainer"
     >
+      <!-- Slot for Custom Content -->
       <slot :currentStep="currentStep" :currentStepIndex="currentStepIndex"></slot>
+
+      <!-- Default Template Content -->
       <div
         v-if="defaultTemplate"
-        class="flex w-[312px] flex-col gap-4 rounded-lg bg-white px-4 py-2 shadow"
+        class="flex w-[320px] flex-col gap-4 rounded-lg bg-white p-6 shadow-lg border border-gray-200 relative"
+        data-test="defaultTemplateContent"
       >
-        <div class="flex">
-          <span class="w-4 h-4 absolute bg-white rotate-45" :class="styleChevron"></span>
+        <!-- Chevron (Arrow Pointer) -->
+        <span
+          class="w-4 h-4 absolute bg-white rotate-45"
+          :class="styleChevron"
+          data-test="chevronPointer"
+        ></span>
 
-          <div v-if="currentStep?.tag" type="info">
-            {{ currentStep.tag }}
-          </div>
-
-          <FontAwesomeIcon
-            :icon="['fas', 'xmark']"
-            class="ml-auto cursor-pointer w-5 h-5"
-            @click="endTour"
-          />
+        <!-- Step Tag (Optional) -->
+        <div
+          v-if="currentStep?.tag"
+          class="text-xs font-medium text-gray-500 uppercase tracking-wider"
+          data-test="stepTag"
+        >
+          {{ currentStep.tag }}
         </div>
 
-        <div v-if="currentStep?.title" v-safe-html="currentStep.title" class="text-xl text-black" />
+        <!-- Close Icon -->
+        <FontAwesomeIcon
+          :icon="['fas', 'xmark']"
+          class="absolute top-4 right-4 cursor-pointer w-5 h-5 text-gray-500 hover:text-gray-700 transition-colors"
+          @click="endTour"
+          data-test="closeIcon"
+        />
 
+        <!-- Step Title -->
+        <div
+          v-if="currentStep?.title"
+          v-safe-html="currentStep.title"
+          class="text-lg font-semibold text-gray-900"
+          data-test="stepTitle"
+        />
+
+        <!-- Step Description -->
         <div
           v-if="currentStep?.description"
           v-safe-html="currentStep.description"
-          class="text-system-content-small text-black"
+          class="text-sm text-gray-600 leading-relaxed"
+          data-test="stepDescription"
         />
 
-        <div class="flex w-full items-center">
+        <!-- Navigation and Control -->
+        <div class="flex w-full items-center mt-4" data-test="navigationControls">
+          <!-- Previous Step Icon -->
           <FontAwesomeIcon
             v-if="isPreviousStepEnabled"
             :icon="['fas', 'chevron-left']"
-            class="mr-auto cursor-pointer text-gray-600 hover:text-gray-800 w-4 h-4"
+            class="mr-auto cursor-pointer text-gray-500 hover:text-gray-700 transition-colors w-4 h-4"
             @click="goPreviousStep"
+            data-test="previousStepIcon"
           />
 
-          <div class="flex flex-1 justify-center gap-2">
+          <!-- Step Indicators (Dots) -->
+          <div class="flex flex-1 justify-center gap-2" data-test="stepIndicators">
             <FontAwesomeIcon
               v-for="(_, idx) in steps.length"
               :key="`dot_step_${idx}`"
               :icon="['fas', 'circle']"
-              :class="idx === currentStepIndex ? 'text-blue-400' : 'text-gray-400'"
+              :class="idx === currentStepIndex ? 'text-blue-500' : 'text-gray-300'"
               class="cursor-pointer w-2 h-2"
               @click="setStep(idx)"
+              :data-test="`stepIndicator_${idx}`"
             />
           </div>
 
+          <!-- Next Step Icon / End Tour -->
           <FontAwesomeIcon
             v-if="isNextStepEnabled"
             :icon="['fas', 'chevron-right']"
-            class="ml-auto cursor-pointer text-gray-600 hover:text-gray-800 w-4 h-4"
+            class="ml-auto cursor-pointer text-gray-500 hover:text-gray-700 transition-colors w-4 h-4"
             @click="goNextStep"
+            data-test="nextStepIcon"
           />
-
           <span
             v-else
-            class="ml-auto cursor-pointer text-gray-600 hover:text-gray-800"
+            class="ml-auto cursor-pointer text-blue-600 hover:text-blue-800 font-medium transition-colors"
             @click="endTour"
+            data-test="terminateTourButton"
           >
             {{ props.labelTerminate }}
           </span>
