@@ -1,8 +1,17 @@
 {
-  "name": "@actechworld/vue-product-tour",
-  "version": "0.0.1-beta.4",
+  "name": "vue-onboarding-tour",
+  "version": "0.0.1-beta.11",
   "private": false,
   "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/vue-onboarding-tour.es.js",
+      "require": "./dist/vue-onboarding-tour.umd.js"
+    }
+  },
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
@@ -17,27 +26,18 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.6.0",
-    "@fortawesome/free-brands-svg-icons": "^6.6.0",
-    "@fortawesome/free-regular-svg-icons": "^6.6.0",
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@fortawesome/vue-fontawesome": "^3.0.8",
     "@vueuse/core": "^11.2.0",
     "@vueuse/integrations": "^11.2.0",
     "i": "^0.3.7",
     "npm": "^10.9.0",
+    "universal-cookie": "^7.2.2",
     "vite-plugin-dts": "^4.3.0",
     "vue": "^3.5.12",
     "vue-safe-html": "^3.0.1"
   },
   "devDependencies": {
-    "@chromatic-com/storybook": "^3.2.2",
-    "@storybook/addon-essentials": "^8.4.2",
-    "@storybook/addon-interactions": "^8.4.2",
-    "@storybook/addon-onboarding": "^8.4.2",
-    "@storybook/blocks": "^8.4.2",
-    "@storybook/test": "^8.4.2",
-    "@storybook/vue3": "^8.4.2",
-    "@storybook/vue3-vite": "^8.4.2",
     "@tsconfig/node22": "^22.0.0",
     "@types/jsdom": "^21.1.7",
     "@types/node": "^22.9.0",
@@ -49,13 +49,11 @@
     "@vue/tsconfig": "^0.5.1",
     "autoprefixer": "^10.4.20",
     "eslint": "^9.14.0",
-    "eslint-plugin-storybook": "^0.11.0",
     "eslint-plugin-vue": "^9.30.0",
     "jsdom": "^25.0.1",
     "npm-run-all2": "^7.0.1",
     "postcss": "^8.4.47",
     "prettier": "^3.3.3",
-    "storybook": "^8.4.2",
     "tailwindcss": "^3.4.14",
     "typescript": "~5.6.3",
     "vite": "^5.4.10",
@@ -64,9 +62,8 @@
     "vitest": "^2.1.4",
     "vue-tsc": "^2.1.10"
   },
-  "eslintConfig": {
-    "extends": [
-      "plugin:storybook/recommended"
-    ]
-  }
+  "files": [
+    "dist",
+    "README.md"
+  ]
 }

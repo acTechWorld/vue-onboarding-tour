@@ -21,8 +21,8 @@ export default defineConfig({
   build: {
     lib: {
       entry: path.resolve(__dirname, 'src/index.ts'), // Adjust path to index.js if needed
-      name: 'VueProductTour',
-      fileName: (format) => `vue-landing.${format}.js`,
+      name: 'VueOnboardingTour',
+      fileName: (format) => `vue-onboarding-tour.${format}.js`,
       formats: ['es', 'umd'],
     },
     rollupOptions: {

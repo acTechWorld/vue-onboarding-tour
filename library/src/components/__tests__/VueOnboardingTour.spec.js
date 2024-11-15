@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils'
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
-import VueProductTour from '@/components/VueProductTour.vue'
+import VueOnboardingTour from '@/components/VueOnboardingTour.vue'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { h } from 'vue'
 
@@ -15,7 +15,7 @@ vi.mock('@fortawesome/vue-fontawesome', () => ({
   },
 }))
 
-describe('VueProductTour', () => {
+describe('VueOnboardingTour', () => {
   const sampleSteps = [
     {
       target: '.step1',
@@ -40,7 +40,7 @@ describe('VueProductTour', () => {
   }
 
   const factory = (props = {}) => {
-    return mount(VueProductTour, {
+    return mount(VueOnboardingTour, {
       props: {
         ...defaultProps,
         ...props,
@@ -92,7 +92,7 @@ describe('VueProductTour', () => {
     wrapper.vm.startTour()
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.find('[data-test="productTour"]').exists()).toBe(true)
+    expect(wrapper.find('[data-test="onboardingTour"]').exists()).toBe(true)
     expect(wrapper.find('[data-test="stepTitle"]').text()).toBe(sampleSteps[0].title)
     expect(wrapper.find('[data-test="stepDescription"]').text()).toBe(sampleSteps[0].description)
   })

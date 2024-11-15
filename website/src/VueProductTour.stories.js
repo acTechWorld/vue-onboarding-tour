@@ -1,27 +1,27 @@
-import VueProductTour from './VueProductTour.vue'
+import VueOnboardingTour from './VueOnboardingTour.vue'
 import { ref } from 'vue'
 export default {
-  title: 'Lib/Components/VueProductTour',
+  title: 'Lib/Components/VueOnboardingTour',
 
-  component: VueProductTour,
+  component: VueOnboardingTour,
 }
 
 const DefaultTemplate = (args) => ({
-  components: { VueProductTour },
+  components: { VueOnboardingTour },
 
   setup() {
-    const productTourPoppin = ref(false)
+    const onboardingTourPoppin = ref(false)
     const displayDocSubMenu = ref(false)
-    return { args, productTourPoppin, displayDocSubMenu }
+    return { args, onboardingTourPoppin, displayDocSubMenu }
   },
 
   mounted() {
-    this.$refs['productTourPoppin'].startTour()
+    this.$refs['onboardingTourPoppin'].startTour()
   },
 
   template: `
     <div class="bg-black relative min-h-screen">
-      <VueProductTour v-bind="args" ref="productTourPoppin" />
+      <VueOnboardingTour v-bind="args" ref="onboardingTourPoppin" />
       <div class="lg:max-w-[1200px] mx-auto">
         <nav class="flex float-end p-5 relative">
           <div>
@@ -36,7 +36,7 @@ const DefaultTemplate = (args) => ({
         <h1
           class="text-4xl md:text-5xl lg:text-6xl font-medium text-white text-balance py-2 text-center pt-[10rem]"
         >
-          <span class="title-product">VueProductTour – The Easiest Way to Guide Your Users in Your Vue App</span>
+          <span class="title-onboarding">VueOnboardingTour – The Easiest Way to Guide Your Users in Your Vue App</span>
         </h1>
         <div class="mt-20">
           <div class="flex text-center gap-10">
@@ -45,7 +45,7 @@ const DefaultTemplate = (args) => ({
                 <span class="text-2xl font-bold text-white">Seamless User Onboarding</span>
               </h3>
               <p class="text-gray-300 mt-3">
-                VueProductTour is a Vue.js component that creates guided, step-by-step product tours
+                VueOnboardingTour is a Vue.js component that creates guided, step-by-step onboarding tours
                 to help users navigate your app intuitively.
               </p>
             </div>
@@ -54,7 +54,7 @@ const DefaultTemplate = (args) => ({
                 <span class="text-2xl font-bold text-white">Lightweight and Ready to Use</span>
               </h3>
               <p class="text-gray-300 mt-3">
-                VueProductTour is designed to be minimal and easy to implement, with a default
+                VueOnboardingTour is designed to be minimal and easy to implement, with a default
                 template that’s ready to go out of the box. Get a fully functional tour set up in
                 minutes!
               </p>
@@ -64,7 +64,7 @@ const DefaultTemplate = (args) => ({
                 <span class="text-2xl font-bold text-white">Fully Customizable</span>
               </h3>
               <p class="text-gray-300 mt-3">
-                Easily adapt VueProductTour to your app’s unique design. With flexible options for
+                Easily adapt VueOnboardingTour to your app’s unique design. With flexible options for
                 styling, you can integrate custom elements, colors, and animations to match your
                 brand.
               </p>
@@ -101,8 +101,8 @@ const DefaultTemplate = (args) => ({
         </div>
         <div class="documentation flex text-gray-300 text-center gap-10 mt-20">
           <div class="border-2 rounded-lg p-5 flex-1 flex flex-col gap-5">
-            <h3 class="text-white text-xl font-bold">Start Using VueProductTour</h3>
-            <p>Jump right in and add VueProductTour to your project with a few simple steps.</p>
+            <h3 class="text-white text-xl font-bold">Start Using VueOnboardingTour</h3>
+            <p>Jump right in and add VueOnboardingTour to your project with a few simple steps.</p>
             <span
               class="text-blue-400 leading-6 cursor-pointer hover:text-blue-600 group w-fit mx-auto relative items-center flex"
             >
@@ -124,7 +124,7 @@ const DefaultTemplate = (args) => ({
           <div class="border-2 rounded-lg p-5 flex-1 flex flex-col gap-5">
             <h3 class="text-white text-xl font-bold">Interactive Storybook</h3>
             <p>
-              Explore VueProductTour in action with our Storybook. See real-time demos and experiment
+              Explore VueOnboardingTour in action with our Storybook. See real-time demos and experiment
               with different configurations and styling options.
             </p>
             <span
@@ -146,37 +146,37 @@ Default.args = {
   tourId: 'tour1',
   steps: [
     {
-      target: '.title-product',
-      title: 'Welcome to VueProductTour!',
+      target: '.title-onboarding',
+      title: 'Welcome to VueOnboardingTour!',
       description:
-        'Take a guided tour through VueProductTour, the ultimate tool for creating intuitive, in-app user guides for your Vue application.',
+        'Take a guided tour through VueOnboardingTour, the ultimate tool for creating intuitive, in-app user guides for your Vue application.',
     },
     {
       target: '.seamless',
       title: 'What is it ?',
       description:
-        'VueProductTour enables you to build step-by-step user guides effortlessly, making it easy for users to navigate through your app and understand its features intuitively.',
+        'VueOnboardingTour enables you to build step-by-step user guides effortlessly, making it easy for users to navigate through your app and understand its features intuitively.',
       tag: 'New!',
     },
     {
       target: '#easy-to-use',
       title: 'Ready to use',
       description:
-        'VueProductTour is designed to be minimal and straightforward to use. With a ready-to-go default template, you can set up a fully functional tour in minutes.',
+        'VueOnboardingTour is designed to be minimal and straightforward to use. With a ready-to-go default template, you can set up a fully functional tour in minutes.',
       tag: 'Easy to use',
     },
     {
       target: '.customizable',
       title: 'Open for customization',
       description:
-        "With flexible customization options, VueProductTour allows you to tailor each step of your tour to fit your app's unique design and brand identity.",
+        "With flexible customization options, VueOnboardingTour allows you to tailor each step of your tour to fit your app's unique design and brand identity.",
       tag: 'NEW Feature!',
     },
     {
       target: '.documentation',
       title: 'Start Now!',
       description:
-        'Need help getting started or looking for advanced features? Our comprehensive documentation provides everything you need to make the most of VueProductTour.',
+        'Need help getting started or looking for advanced features? Our comprehensive documentation provides everything you need to make the most of VueOnboardingTour.',
       tag: 'Documentation',
     },
     {
@@ -195,31 +195,31 @@ Default.args = {
 }
 
 const CustomizedTemplate = (args) => ({
-  components: { VueProductTour },
+  components: { VueOnboardingTour },
 
   setup() {
-    const productTourPoppin = ref(false)
+    const onboardingTourPoppin = ref(false)
     const displayDocSubMenu = ref(false)
 
-    return { args, productTourPoppin, displayDocSubMenu }
+    return { args, onboardingTourPoppin, displayDocSubMenu }
   },
   methods: {
     closePopup() {
-      this.$refs['productTourPoppin'].endTour()
+      this.$refs['onboardingTourPoppin'].endTour()
     },
     next() {
-      this.$refs['productTourPoppin'].goNextStep()
+      this.$refs['onboardingTourPoppin'].goNextStep()
     },
     previous() {
-      this.$refs['productTourPoppin'].goPreviousStep()
+      this.$refs['onboardingTourPoppin'].goPreviousStep()
     },
   },
   mounted() {
-    this.$refs['productTourPoppin'].startTour()
+    this.$refs['onboardingTourPoppin'].startTour()
   },
   template: `
     <div class="bg-black relative min-h-screen">
-      <VueProductTour v-bind="args" ref="productTourPoppin" v-slot="slotProps">
+      <VueOnboardingTour v-bind="args" ref="onboardingTourPoppin" v-slot="slotProps">
         <div class="relative bg-yellow-50 rounded-xl shadow-2xl w-80 p-6 text-center border-4 border-dashed border-yellow-400 transform transition-all duration-500 scale-100 hover:scale-105 animate-bounceIn">
           <!-- Close Button -->
           <button @click="closePopup" class="absolute top-3 pb-1 right-3 w-10 h-10 bg-purple-500 text-white rounded-full flex items-center justify-center text-2xl font-bold shadow-lg hover:bg-purple-700 transition duration-200 transform hover:rotate-45">&times;</button>
@@ -236,7 +236,7 @@ const CustomizedTemplate = (args) => ({
             <button @click="next()" class="px-4 py-2 bg-green-500 text-white font-bold rounded-full hover:bg-green-600 shadow-md transform hover:scale-110 transition duration-300 ease-out">Next</button>
           </div>
         </div>
-      </VueProductTour>
+      </VueOnboardingTour>
       <div class="lg:max-w-[1200px] mx-auto">
         <nav class="flex float-end p-5 relative">
           <div>
@@ -251,7 +251,7 @@ const CustomizedTemplate = (args) => ({
          <h1
           class="text-4xl md:text-5xl lg:text-6xl font-medium text-white text-balance py-2 text-center pt-[10rem]"
         >
-          <span class="title-product">VueProductTour – The Easiest Way to Guide Your Users in Your Vue App</span>
+          <span class="title-onboarding">VueOnboardingTour – The Easiest Way to Guide Your Users in Your Vue App</span>
         </h1>
         <div class="mt-20">
           <div class="flex text-center gap-10">
@@ -260,7 +260,7 @@ const CustomizedTemplate = (args) => ({
                 <span class="text-2xl font-bold text-white">Seamless User Onboarding</span>
               </h3>
               <p class="text-gray-300 mt-3">
-                VueProductTour is a Vue.js component that creates guided, step-by-step product tours
+                VueOnboardingTour is a Vue.js component that creates guided, step-by-step onboarding tours
                 to help users navigate your app intuitively.
               </p>
             </div>
@@ -269,7 +269,7 @@ const CustomizedTemplate = (args) => ({
                 <span class="text-2xl font-bold text-white">Lightweight and Ready to Use</span>
               </h3>
               <p class="text-gray-300 mt-3">
-                VueProductTour is designed to be minimal and easy to implement, with a default
+                VueOnboardingTour is designed to be minimal and easy to implement, with a default
                 template that’s ready to go out of the box. Get a fully functional tour set up in
                 minutes!
               </p>
@@ -279,7 +279,7 @@ const CustomizedTemplate = (args) => ({
                 <span class="text-2xl font-bold text-white">Fully Customizable</span>
               </h3>
               <p class="text-gray-300 mt-3">
-                Easily adapt VueProductTour to your app’s unique design. With flexible options for
+                Easily adapt VueOnboardingTour to your app’s unique design. With flexible options for
                 styling, you can integrate custom elements, colors, and animations to match your
                 brand.
               </p>
@@ -316,8 +316,8 @@ const CustomizedTemplate = (args) => ({
         </div>
         <div class="documentation flex text-gray-300 text-center gap-10 mt-20">
           <div class="border-2 rounded-lg p-5 flex-1 flex flex-col gap-5">
-            <h3 class="text-white text-xl font-bold">Start Using VueProductTour</h3>
-            <p>Jump right in and add VueProductTour to your project with a few simple steps.</p>
+            <h3 class="text-white text-xl font-bold">Start Using VueOnboardingTour</h3>
+            <p>Jump right in and add VueOnboardingTour to your project with a few simple steps.</p>
             <span
               class="text-blue-400 leading-6 cursor-pointer hover:text-blue-600 group w-fit mx-auto relative items-center flex"
             >
@@ -339,7 +339,7 @@ const CustomizedTemplate = (args) => ({
           <div class="border-2 rounded-lg p-5 flex-1 flex flex-col gap-5">
             <h3 class="text-white text-xl font-bold">Interactive Storybook</h3>
             <p>
-              Explore VueProductTour in action with our Storybook. See real-time demos and experiment
+              Explore VueOnboardingTour in action with our Storybook. See real-time demos and experiment
               with different configurations and styling options.
             </p>
             <span
@@ -360,37 +360,37 @@ Customized.args = {
   defaultTemplate: false,
   steps: [
     {
-      target: '.title-product',
-      title: 'Welcome to VueProductTour!',
+      target: '.title-onboarding',
+      title: 'Welcome to VueOnboardingTour!',
       description:
-        'Take a guided tour through VueProductTour, the ultimate tool for creating intuitive, in-app user guides for your Vue application.',
+        'Take a guided tour through VueOnboardingTour, the ultimate tool for creating intuitive, in-app user guides for your Vue application.',
     },
     {
       target: '.seamless',
       title: 'What is it ?',
       description:
-        'VueProductTour enables you to build step-by-step user guides effortlessly, making it easy for users to navigate through your app and understand its features intuitively.',
+        'VueOnboardingTour enables you to build step-by-step user guides effortlessly, making it easy for users to navigate through your app and understand its features intuitively.',
       tag: 'New!',
     },
     {
       target: '#easy-to-use',
       title: 'Ready to use',
       description:
-        'VueProductTour is designed to be minimal and straightforward to use. With a ready-to-go default template, you can set up a fully functional tour in minutes.',
+        'VueOnboardingTour is designed to be minimal and straightforward to use. With a ready-to-go default template, you can set up a fully functional tour in minutes.',
       tag: 'Easy to use',
     },
     {
       target: '.customizable',
       title: 'Open for customization',
       description:
-        "With flexible customization options, VueProductTour allows you to tailor each step of your tour to fit your app's unique design and brand identity.",
+        "With flexible customization options, VueOnboardingTour allows you to tailor each step of your tour to fit your app's unique design and brand identity.",
       tag: 'NEW Feature!',
     },
     {
       target: '.documentation',
       title: 'Start Now!',
       description:
-        'Need help getting started or looking for advanced features? Our comprehensive documentation provides everything you need to make the most of VueProductTour.',
+        'Need help getting started or looking for advanced features? Our comprehensive documentation provides everything you need to make the most of VueOnboardingTour.',
       tag: 'Documentation',
     },
     {
