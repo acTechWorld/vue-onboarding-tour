@@ -1,6 +1,6 @@
 {
   "name": "vue-onboarding-tour",
-  "version": "0.0.1-beta.12",
+  "version": "0.0.1-beta.13",
   "private": false,
   "type": "module",
   "publishConfig": {
@@ -16,7 +16,7 @@
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
-    "test:unit": "vitest",
+    "test:unit": "vitest --environment jsdom",
     "build-only": "vite build",
     "type-check": "vue-tsc --build --force",
     "lint": "eslint . --fix",

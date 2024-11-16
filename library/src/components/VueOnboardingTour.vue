@@ -240,7 +240,7 @@ const updateStylePopupLeftRight = (left: number, targetTop: number, popupPos: DO
 }
 
 const getStyles = () => {
-  const targetElPos = document.querySelector(currentStep.value?.target)?.getBoundingClientRect()
+  const targetElPos = currentStep.value?.target && document.querySelector(currentStep.value?.target)?.getBoundingClientRect()
   const popupPos = popup.value?.getBoundingClientRect()
 
   if (targetElPos && popupPos) {
@@ -349,33 +349,35 @@ const endTour = () => {
 }
 
 const checkAutoScroll = () => {
-  const { top: targetTop, left: targetLeft } =
+  if(currentStep.value?.target) {
+    const { top: targetTop, left: targetLeft } =
     document.querySelector(currentStep.value?.target)?.getBoundingClientRect() ?? {}
-  const popupPos = popup.value?.getBoundingClientRect()
-  if (
-    targetTop &&
-    targetLeft &&
-    popupPos &&
-    (targetTop < 0 ||
-      targetTop > window.innerHeight ||
-      targetLeft < 0 ||
-      targetLeft > window.innerWidth)
-  ) {
-    const top =
-      targetTop < 0 || targetTop > window.innerHeight ? targetTop - popupPos.height - 60 : undefined
-    const left = targetLeft < 0 || targetLeft > window.innerWidth ? targetLeft : undefined
-    if (scrollableContainerElement.value) {
-      scrollableContainerElement.value.scrollTo({
-        left: left,
-        top: top,
-        behavior: 'smooth',
-      })
-    } else {
-      window.scrollTo({
-        left: left,
-        top: top,
-        behavior: 'smooth',
-      })
+    const popupPos = popup.value?.getBoundingClientRect()
+    if (
+      targetTop &&
+      targetLeft &&
+      popupPos &&
+      (targetTop < 0 ||
+        targetTop > window.innerHeight ||
+        targetLeft < 0 ||
+        targetLeft > window.innerWidth)
+    ) {
+      const top =
+        targetTop < 0 || targetTop > window.innerHeight ? targetTop - popupPos.height - 60 : undefined
+      const left = targetLeft < 0 || targetLeft > window.innerWidth ? targetLeft : undefined
+      if (scrollableContainerElement.value) {
+        scrollableContainerElement.value.scrollTo({
+          left: left,
+          top: top,
+          behavior: 'smooth',
+        })
+      } else {
+        window.scrollTo({
+          left: left,
+          top: top,
+          behavior: 'smooth',
+        })
+      }
     }
   }
 }

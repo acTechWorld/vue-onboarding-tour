@@ -45,7 +45,12 @@ const displayDocSubMenu = ref(false)
 /** METHODS */
 const goToGithubPage = (hash: string) => {
   window.open(
-    `https://github.com/acTechWorld/vue-onboarding-tour/tree/develop?tab=readme-ov-file#${hash}`,
+    `https://github.com/acTechWorld/vue-onboarding-tour/tree/master/library?tab=readme-ov-file#${hash}`,
+  )
+}
+const goToStoryBook = () => {
+  window.open(
+    `https://vueonboardingtour.storybook.actechworld.com/?path=/story/lib-components-vueonboardingtour--default`,
   )
 }
 /** LIFECYCLE */
@@ -57,7 +62,7 @@ onMounted(() => {
 <template>
   <main class="bg-black relative min-h-screen">
     <nav class="flex float-end p-5 relative z-10">
-      <div @mouseenter="displayDocSubMenu = true" @mouseleave="displayDocSubMenu = false">
+      <div @mouseenter="displayDocSubMenu = true" @mouseleave="displayDocSubMenu = false" @click="displayDocSubMenu = true">
         <div id="nav-doc" class="cursor-pointer text-purple-400 text-xl mb-2">Documentation</div>
         <div
           id="nav-doc-sub-container"
@@ -76,21 +81,21 @@ onMounted(() => {
           >
             Online Documentation
           </p>
-          <p class="cursor-pointer hover:bg-purple-950 py-1">Storybook</p>
+          <p class="cursor-pointer hover:bg-purple-950 py-1" @click="goToStoryBook">Storybook</p>
         </div>
       </div>
     </nav>
     <VueOnboardingTour v-bind="configOnboardingTour" ref="onboardingTourPoppin" />
-    <div class="lg:max-w-[1200px] mx-auto">
+    <div class="lg:max-w-[1200px] mx-auto px-10 py-[10rem]">
       <h1
-        class="text-4xl md:text-5xl lg:text-6xl font-medium text-white text-balance py-2 text-center pt-[10rem]"
+        class="text-4xl md:text-5xl lg:text-6xl font-medium text-white text-balance py-2 text-center break-words"
       >
         <span class="title-onboarding">
           VueOnboardingTour – The Easiest Way to Guide Your Users in Your Vue App
         </span>
       </h1>
       <div class="mt-20">
-        <div class="flex text-center gap-10">
+        <div class="flex md:!flex-row flex-col text-center gap-10 md:gap-5 lg:gap-10 max-w-[500px] mx-auto md:max-w-full">
           <div class="seamless flex-1">
             <h3>
               <span class="text-2xl font-bold text-white">Seamless User Onboarding</span>
@@ -123,7 +128,7 @@ onMounted(() => {
         </div>
         <div
           aria-hidden="true"
-          class="hidden md:block absolute left-[calc(50%-4rem)] top-[calc(50%-20rem)] transform-gpu blur-3xl sm:left-[calc(50%-18rem)] lg:left-48 xl:left-[calc(50%-24rem)]"
+          class="hidden lg:!block absolute top-[calc(50%-20rem)] transform-gpu blur-3xl"
         >
           <div
             style="
@@ -146,55 +151,61 @@ onMounted(() => {
                 73.6% 51.7%
               );
             "
-            class="aspect-[1108/632] w-[69.25rem] bg-gradient-to-r from-[#80caff] to-[#4f46e5] opacity-20"
+            class="aspect-[980/632] w-[980px] bg-gradient-to-r from-[#80caff] to-[#4f46e5] opacity-20"
           ></div>
         </div>
       </div>
-      <div class="documentation flex text-gray-300 text-center gap-10 mt-20">
-        <div class="border-2 rounded-lg p-5 flex-1 flex flex-col gap-5">
-          <h3 class="text-white text-xl font-bold">Start Using VueOnboardingTour</h3>
-          <p>Jump right in and add VueOnboardingTour to your project with a few simple steps.</p>
-          <span
-            class="text-blue-400 leading-6 cursor-pointer hover:text-blue-600 group w-fit mx-auto relative items-center flex"
-          >
-            Start with the installation guide
-            <FontAwesomeIcon
-              class="absolute -right-6 group-hover:-right-8 transition-all"
-              :icon="['fas', 'arrow-right']"
-            />
-          </span>
+      <div class="documentation flex md:!flex-row flex-col text-center gap-10 md:gap-5 lg:gap-10 max-w-[500px] mx-auto md:max-w-full text-gray-300 mt-20">
+        <div class="bg-gradient-to-r from-red-500  via-yellow-500 to-violet-500 rounded-lg flex-1 p-[2px]" @click="goToGithubPage('installation')">
+          <div class="bg-black flex flex-col gap-5 p-5 rounded-lg h-full">
+            <h3 class="text-white text-xl font-bold">Start Using VueOnboardingTour</h3>
+            <p>Jump right in and add VueOnboardingTour to your project with a few simple steps.</p>
+            <span
+              class="text-blue-400 leading-6 cursor-pointer hover:text-blue-600 group w-fit mx-auto relative items-center flex pr-4"
+            >
+              Start with the installation guide
+              <FontAwesomeIcon
+                class="absolute -right-2 group-hover:-right-4 transition-all"
+                :icon="['fas', 'arrow-right']"
+              />
+            </span>
+          </div>
         </div>
-        <div class="border-2 rounded-lg p-5 flex-1 flex flex-col gap-5">
-          <h3 class="text-white text-xl font-bold">Online Documentation</h3>
-          <p>
-            Access the full documentation for detailed guidance on setup, customization, and
-            advanced features.
-          </p>
-          <span
-            class="text-blue-400 leading-6 cursor-pointer hover:text-blue-600 group w-fit mx-auto relative items-center flex"
-          >
-            Explore the docs
-            <FontAwesomeIcon
-              class="absolute -right-6 group-hover:-right-8 transition-all"
-              :icon="['fas', 'arrow-right']"
-            />
-          </span>
+        <div class="bg-gradient-to-r from-red-500  via-yellow-500 to-violet-500 rounded-lg flex-1 p-[2px]" @click="goToGithubPage('documentation')">
+          <div class="bg-black flex flex-col gap-5 p-5 rounded-lg h-full">
+            <h3 class="text-white text-xl font-bold">Online Documentation</h3>
+            <p>
+              Access the full documentation for detailed guidance on setup, customization, and
+              advanced features.
+            </p>
+            <span
+              class="text-blue-400 leading-6 cursor-pointer hover:text-blue-600 group w-fit mx-auto relative items-center flex pr-4"
+            >
+              Explore the docs
+              <FontAwesomeIcon
+                class="absolute -right-2 group-hover:-right-4 transition-all"
+                :icon="['fas', 'arrow-right']"
+              />
+            </span>
+          </div>
         </div>
-        <div class="border-2 rounded-lg p-5 flex-1 flex flex-col gap-5">
-          <h3 class="text-white text-xl font-bold">Interactive Storybook</h3>
-          <p>
-            Explore VueOnboardingTour in action with our Storybook. See real-time demos and experiment
-            with different configurations and styling options.
-          </p>
-          <span
-            class="text-blue-400 leading-6 cursor-pointer hover:text-blue-600 group w-fit mx-auto relative items-center flex"
-          >
-            Check out the Storybook
-            <FontAwesomeIcon
-              class="absolute -right-6 group-hover:-right-8 transition-all"
-              :icon="['fas', 'arrow-right']"
-            />
-          </span>
+        <div class="bg-gradient-to-r from-red-500  via-yellow-500 to-violet-500 rounded-lg flex-1 p-[2px]" @click="goToStoryBook">
+          <div class="bg-black flex flex-col gap-5 p-5 rounded-lg">
+            <h3 class="text-white text-xl font-bold">Interactive Storybook</h3>
+            <p>
+              Explore VueOnboardingTour in action with our Storybook. See real-time demos and experiment
+              with different configurations and styling options.
+            </p>
+            <span
+              class="text-blue-400 leading-6 cursor-pointer hover:text-blue-600 group w-fit mx-auto relative items-center flex pr-4"
+            >
+              Check out the Storybook
+              <FontAwesomeIcon
+                class="absolute -right-2 group-hover:-right-4 transition-all"
+                :icon="['fas', 'arrow-right']"
+              />
+            </span>
+          </div>
         </div>
       </div>
     </div>
