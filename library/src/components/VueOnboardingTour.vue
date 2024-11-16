@@ -2,17 +2,18 @@
   <div
     v-if="displayOnboardingTour"
     data-test="onboardingTour"
+    class="vueOnboardingTour"
     :class="{ 'fixed z-[9999] h-full w-full': overlay }"
   >
     <!-- Overlay Background -->
-    <div v-if="overlay" :style="styleOverlay" data-test="overlay"></div>
+    <div v-if="overlay" :style="styleOverlay" data-test="overlay" class="overlay"></div>
 
     <!-- Popup Container -->
     <div
       ref="popup"
       :style="stylePopup"
       :class="[targetElementVisible ? 'fixed' : 'hidden']"
-      class="z-[9999]"
+      class="popupContainer z-[9999]"
       data-test="popupContainer"
     >
       <!-- Slot for Custom Content -->
@@ -21,12 +22,12 @@
       <!-- Default Template Content -->
       <div
         v-if="defaultTemplate"
-        class="flex w-[320px] flex-col gap-4 rounded-lg bg-white p-6 shadow-lg border border-gray-200 relative"
+        class="defaultTemplateContent flex w-[320px] flex-col gap-4 rounded-lg bg-white p-6 shadow-lg border border-gray-200 relative"
         data-test="defaultTemplateContent"
       >
         <!-- Chevron (Arrow Pointer) -->
         <span
-          class="w-4 h-4 absolute bg-white rotate-45"
+          class="chevronPointer w-4 h-4 absolute bg-white rotate-45"
           :class="styleChevron"
           data-test="chevronPointer"
         ></span>
@@ -34,7 +35,7 @@
         <!-- Step Tag (Optional) -->
         <div
           v-if="currentStep?.tag"
-          class="text-xs font-medium text-gray-500 uppercase tracking-wider"
+          class="stepTag text-xs font-medium text-gray-500 uppercase tracking-wider"
           data-test="stepTag"
         >
           {{ currentStep.tag }}
@@ -43,7 +44,7 @@
         <!-- Close Icon -->
         <FontAwesomeIcon
           :icon="['fas', 'xmark']"
-          class="absolute top-4 right-4 cursor-pointer w-5 h-5 text-gray-500 hover:text-gray-700 transition-colors"
+          class="closeIcon absolute top-4 right-4 cursor-pointer w-5 h-5 text-gray-500 hover:text-gray-700 transition-colors"
           @click="endTour"
           data-test="closeIcon"
         />
@@ -52,7 +53,7 @@
         <div
           v-if="currentStep?.title"
           v-safe-html="currentStep.title"
-          class="text-lg font-semibold text-gray-900"
+          class="stepTitle text-lg font-semibold text-gray-900"
           data-test="stepTitle"
         />
 
@@ -60,28 +61,28 @@
         <div
           v-if="currentStep?.description"
           v-safe-html="currentStep.description"
-          class="text-sm text-gray-600 leading-relaxed"
+          class="stepDescription text-sm text-gray-600 leading-relaxed"
           data-test="stepDescription"
         />
 
         <!-- Navigation and Control -->
-        <div class="flex w-full items-center mt-4" data-test="navigationControls">
+        <div class="navigationControls flex w-full items-center mt-4" data-test="navigationControls">
           <!-- Previous Step Icon -->
           <FontAwesomeIcon
             v-if="isPreviousStepEnabled"
             :icon="['fas', 'chevron-left']"
-            class="mr-auto cursor-pointer text-gray-500 hover:text-gray-700 transition-colors w-4 h-4"
+            class="previousStepIcon mr-auto cursor-pointer text-gray-500 hover:text-gray-700 transition-colors w-4 h-4"
             @click="goPreviousStep"
             data-test="previousStepIcon"
           />
 
           <!-- Step Indicators (Dots) -->
-          <div class="flex flex-1 justify-center gap-2" data-test="stepIndicators">
+          <div class="stepIndicators flex flex-1 justify-center gap-2" data-test="stepIndicators">
             <FontAwesomeIcon
               v-for="(_, idx) in steps.length"
               :key="`dot_step_${idx}`"
               :icon="['fas', 'circle']"
-              :class="idx === currentStepIndex ? 'text-blue-500' : 'text-gray-300'"
+              :class="[idx === currentStepIndex ? 'text-blue-500' : 'text-gray-300', `stepIndicator_${idx}`]"
               class="cursor-pointer w-2 h-2"
               @click="setStep(idx)"
               :data-test="`stepIndicator_${idx}`"
@@ -92,13 +93,13 @@
           <FontAwesomeIcon
             v-if="isNextStepEnabled"
             :icon="['fas', 'chevron-right']"
-            class="ml-auto cursor-pointer text-gray-500 hover:text-gray-700 transition-colors w-4 h-4"
+            class="nextStepIcon ml-auto cursor-pointer text-gray-500 hover:text-gray-700 transition-colors w-4 h-4"
             @click="goNextStep"
             data-test="nextStepIcon"
           />
           <span
             v-else
-            class="ml-auto cursor-pointer text-blue-600 hover:text-blue-800 font-medium transition-colors"
+            class="terminateTourButton ml-auto cursor-pointer text-blue-600 hover:text-blue-800 font-medium transition-colors"
             @click="endTour"
             data-test="terminateTourButton"
           >
@@ -112,11 +113,8 @@
 
 <script setup lang="ts">
 import { type MaybeElement, useElementBounding } from '@vueuse/core'
-
 import { ref, onMounted, watch, computed, nextTick, onUnmounted, type Ref } from 'vue'
-
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-
 import { useCookies } from '@vueuse/integrations/useCookies'
 
 const props = withDefaults(
@@ -166,25 +164,21 @@ const cookies = useCookies()
 
 const emits = defineEmits(['startTour', 'endTour'])
 
-let domObserver: MutationObserver
+let domObserverTarget: MutationObserver
+let domObserverScrollable: MutationObserver
 
 const targetElement: Ref<Element | null> = ref(null)
+const scrollableContainerElement: Ref<Element | null> = ref(null)
 
 /** COMPUTED */
-
 const currentStep = computed(() =>
   props.steps?.length > 0 ? props.steps[currentStepIndex.value] : undefined,
 )
 
 const targetElementBound = computed(() => useElementBounding(targetElement.value as MaybeElement))
 
-const scrollableContainer = computed(
-  () =>
-    props.scrollableContainerSelector && document.querySelector(props.scrollableContainerSelector),
-)
-
 const scrollableContainerBound = computed(
-  () => scrollableContainer.value && useElementBounding(scrollableContainer.value as MaybeElement),
+  () => scrollableContainerElement.value && useElementBounding(scrollableContainerElement.value as MaybeElement),
 )
 
 const targetElementVisible = computed(() => {
@@ -209,16 +203,12 @@ const styleChevron = computed(() => {
   switch (popupPosition.value) {
     case 'left':
       return '-right-2 top-3'
-
     case 'right':
       return '-left-2 top-3'
-
     case 'top':
       return 'left-3 -bottom-2'
-
     case 'bottom':
       return 'left-3 -top-2'
-
     default:
       return '-right-2 top-3'
   }
@@ -236,7 +226,6 @@ const displayOnboardingTour = computed(
 
 const updateStylePopupLeftRight = (left: number, targetTop: number, popupPos: DOMRect) => {
   let top
-
   if (targetTop + popupPos.height > window.innerHeight) {
     top = window.innerHeight - popupPos.height
   } else if (targetTop <= 0) {
@@ -244,7 +233,6 @@ const updateStylePopupLeftRight = (left: number, targetTop: number, popupPos: DO
   } else {
     top = targetTop
   }
-
   stylePopup.value = {
     top: `${top}px`,
     left: `${left}px`,
@@ -267,12 +255,13 @@ const getStyles = () => {
 
     styleOverlay.value = {
       position: 'fixed',
-      width: `${targetWidth}px`,
-      height: `${targetHeight}px`,
-      top: `${targetTop}px`,
-      left: `${targetLeft}px`,
-      boxShadow: 'inset 0px 0px 0px 0px rgba(0, 0, 0, 0), 0px 0px 0px 9999px rgba(0, 0, 0, 0.5)',
+      width: `${targetWidth + 24}px`,
+      height: `${targetHeight + 24}px`,
+      top: `${targetTop - 12}px`,
+      left: `${targetLeft - 12}px`,
+      boxShadow: 'inset 0px 0px 10px 0px rgba(255, 255, 255, 1), 0px 0px 0px 9999px rgba(0, 0, 0, 0.5)',
       userEvent: 'none',
+      borderRadius: '10px',
       zIndex: 9999,
     }
 
@@ -375,8 +364,8 @@ const checkAutoScroll = () => {
     const top =
       targetTop < 0 || targetTop > window.innerHeight ? targetTop - popupPos.height - 60 : undefined
     const left = targetLeft < 0 || targetLeft > window.innerWidth ? targetLeft : undefined
-    if (scrollableContainer.value) {
-      scrollableContainer.value.scrollTo({
+    if (scrollableContainerElement.value) {
+      scrollableContainerElement.value.scrollTo({
         left: left,
         top: top,
         behavior: 'smooth',
@@ -392,25 +381,52 @@ const checkAutoScroll = () => {
 }
 
 const getTargetElement = () => {
-  //Add observer to wait for dom generation if element not directly in DOM
-  if (document.querySelector(currentStep.value?.target)) {
-    targetElement.value = document.querySelector(currentStep.value?.target)
-  } else {
-    const targetNode = document.body
-    const config = { childList: true, subtree: true }
-    domObserver = new MutationObserver((mutationsList) => {
-      for (const mutation of mutationsList) {
-        if (mutation.type === 'childList') {
-          const externalElement = document.querySelector(currentStep.value?.target)
-          if (externalElement) {
-            targetElement.value = externalElement
-            domObserver.disconnect()
+  if(currentStep.value?.target) {
+    //Add observer to wait for dom generation if element not directly in DOM
+    if (document.querySelector(currentStep.value?.target)) {
+      targetElement.value = document.querySelector(currentStep.value?.target)
+    } else {
+      const targetNode = document.body
+      const config = { childList: true, subtree: true }
+      domObserverTarget = new MutationObserver((mutationsList) => {
+        for (const mutation of mutationsList) {
+          if (mutation.type === 'childList') {
+            const externalElement = currentStep.value?.target && document.querySelector(currentStep.value?.target)
+            if (externalElement) {
+              targetElement.value = externalElement
+              domObserverTarget.disconnect()
+            }
           }
         }
-      }
-    })
+      })
 
-    domObserver.observe(targetNode, config) // Start observing
+      domObserverTarget.observe(targetNode, config) // Start observing
+    }
+  }
+}
+
+const getScrollableContainerElement = () => {
+  if(props.scrollableContainerSelector) {
+    //Add observer to wait for dom generation if element not directly in DOM
+    if (document.querySelector(props.scrollableContainerSelector)) {
+      scrollableContainerElement.value = document.querySelector(props.scrollableContainerSelector)
+    } else {
+      const targetNode = document.body
+      const config = { childList: true, subtree: true }
+      domObserverScrollable = new MutationObserver((mutationsList) => {
+        for (const mutation of mutationsList) {
+          if (mutation.type === 'childList') {
+            const externalElement = props.scrollableContainerSelector && document.querySelector(props.scrollableContainerSelector)
+            if (externalElement) {
+              scrollableContainerElement.value = externalElement
+              domObserverScrollable.disconnect()
+            }
+          }
+        }
+      })
+
+      domObserverScrollable.observe(targetNode, config) // Start observing
+    }
   }
 }
 
@@ -437,14 +453,18 @@ onMounted(() => {
   window.addEventListener('scroll', scrollEventListener)
   if (props.startEvent) window.addEventListener(props.startEvent, startTour)
   getTargetElement()
+  getScrollableContainerElement()
 })
 
 onUnmounted(() => {
   window.removeEventListener('resize', resizeEventListener)
   window.removeEventListener('scroll', scrollEventListener)
   if (props.startEvent) window.removeEventListener(props.startEvent, startTour)
-  if (domObserver) {
-    domObserver.disconnect() // Clean up when component is destroyed
+  if (domObserverTarget) {
+    domObserverTarget.disconnect() // Clean up when component is destroyed
+  }
+  if (domObserverScrollable) {
+    domObserverScrollable.disconnect() // Clean up when component is destroyed
   }
 })
 

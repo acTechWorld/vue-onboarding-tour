@@ -1,6 +1,6 @@
 {
   "name": "vue-onboarding-tour",
-  "version": "0.0.1-beta.11",
+  "version": "0.0.1-beta.12",
   "private": false,
   "type": "module",
   "publishConfig": {
@@ -38,6 +38,16 @@
     "vue-safe-html": "^3.0.1"
   },
   "devDependencies": {
+    "@chromatic-com/storybook": "^3.2.2",
+    "@storybook/addon-essentials": "^8.4.2",
+    "@storybook/addon-interactions": "^8.4.2",
+    "@storybook/addon-onboarding": "^8.4.2",
+    "@storybook/blocks": "^8.4.2",
+    "@storybook/test": "^8.4.2",
+    "@storybook/vue3": "^8.4.2",
+    "@storybook/vue3-vite": "^8.4.2",
+    "storybook": "^8.4.2",
+    "eslint-plugin-storybook": "^0.11.0",
     "@tsconfig/node22": "^22.0.0",
     "@types/jsdom": "^21.1.7",
     "@types/node": "^22.9.0",
@@ -61,6 +71,11 @@
     "vite-plugin-vue-devtools": "^7.5.4",
     "vitest": "^2.1.4",
     "vue-tsc": "^2.1.10"
+  },
+  "eslintConfig": {
+    "extends": [
+      "plugin:storybook/recommended"
+    ]
   },
   "files": [
     "dist",
