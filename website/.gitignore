@@ -26,5 +26,4 @@ dist.zip
 *.njsproj
 *.sln
 *.sw?
-.DS_Store
 *.tsbuildinfo

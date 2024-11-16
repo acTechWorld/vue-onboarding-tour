@@ -17,20 +17,14 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.6.0",
-    "@fortawesome/free-brands-svg-icons": "^6.6.0",
-    "@fortawesome/free-regular-svg-icons": "^6.6.0",
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@fortawesome/vue-fontawesome": "^3.0.8",
-    "@vueuse/core": "^11.2.0",
-    "@vueuse/integrations": "^11.2.0",
     "i": "^0.3.7",
     "install": "^0.13.0",
     "npm": "^10.9.0",
-    "universal-cookie": "^7.2.2",
     "vite-plugin-dts": "^4.3.0",
     "vue": "^3.5.12",
-    "vue-onboarding-tour": "^0.0.1-beta.11",
-    "vue-safe-html": "^3.0.1"
+    "vue-onboarding-tour": "^0.0.1-beta.11"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.2",
