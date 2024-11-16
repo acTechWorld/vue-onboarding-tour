@@ -22,7 +22,7 @@
     "npm": "^10.9.0",
     "vite-plugin-dts": "^4.3.0",
     "vue": "^3.5.12",
-    "vue-onboarding-tour": "^0.0.1-beta.13"
+    "vue-onboarding-tour": "^0.0.1"
   },
   "devDependencies": {
     "@tsconfig/node22": "^22.0.0",
