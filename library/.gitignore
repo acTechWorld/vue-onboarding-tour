@@ -16,7 +16,7 @@ coverage
 .npmrc
 /cypress/videos/
 /cypress/screenshots/
-dist.zip
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -26,5 +26,5 @@ dist.zip
 *.njsproj
 *.sln
 *.sw?
-.DS_Store
+
 *.tsbuildinfo
