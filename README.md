@@ -41,13 +41,13 @@
 Using **npm**:
 
 ```bash
-npm install @acTechWorld/vue-onboarding-tour
+npm install vue-onboarding-tour
 ```
 
 Or, using **yarn**:
 
 ```bash
-yarn add @acTechWorld/vue-onboarding-tour
+yarn add vue-onboarding-tour
 ```
 
 ### 2. Import and Register the Library in Your Project
@@ -60,7 +60,7 @@ After installation, import **vue-onboarding-tour** in your main JavaScript file 
 // main.js
 import Vue from 'vue'
 import App from './App.vue'
-import VueOnboardingTour from '@acTechWorld/vue-onboarding-tour'
+import VueOnboardingTour from 'vue-onboarding-tour'
 
 Vue.use(VueOnboardingTour)
 
@@ -75,7 +75,7 @@ new Vue({
 // main.js
 import { createApp } from 'vue'
 import App from './App.vue'
-import VueOnboardingTour from '@acTechWorld/vue-onboarding-tour'
+import VueOnboardingTour from 'vue-onboarding-tour'
 
 const app = createApp(App)
 app.use(VueOnboardingTour)

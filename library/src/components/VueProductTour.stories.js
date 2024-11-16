@@ -1,5 +1,5 @@
-import VueOnboardingTour from './VueOnboardingTour.vue'
 import { ref } from 'vue'
+import VueOnboardingTour from './VueOnboardingTour.vue'
 export default {
   title: 'Lib/Components/VueOnboardingTour',
 
@@ -361,7 +361,7 @@ Customized.args = {
   steps: [
     {
       target: '.title-onboarding',
-      title: 'Welcome to VueOnboardingTour!',
+      title: 'Welcome to VueOnboardingTour',
       description:
         'Take a guided tour through VueOnboardingTour, the ultimate tool for creating intuitive, in-app user guides for your Vue application.',
     },

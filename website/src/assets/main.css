@@ -2,3 +2,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+    .rainbow-border {
+      border: 2px solid;
+      border-radius: 8px; /* Set border radius */
+      border-color: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+    }
+  }
