@@ -1,7 +1,8 @@
 {
   "name": "vue-onboarding-tour",
-  "version": "0.0.1-beta.13",
+  "version": "0.0.2-beta.1",
   "private": false,
+  "license": "MIT",
   "type": "module",
   "publishConfig": {
     "access": "public"
@@ -25,9 +26,6 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^6.6.0",
-    "@fortawesome/free-solid-svg-icons": "^6.6.0",
-    "@fortawesome/vue-fontawesome": "^3.0.8",
     "@vueuse/core": "^11.2.0",
     "@vueuse/integrations": "^11.2.0",
     "i": "^0.3.7",
@@ -46,8 +44,6 @@
     "@storybook/test": "^8.4.2",
     "@storybook/vue3": "^8.4.2",
     "@storybook/vue3-vite": "^8.4.2",
-    "storybook": "^8.4.2",
-    "eslint-plugin-storybook": "^0.11.0",
     "@tsconfig/node22": "^22.0.0",
     "@types/jsdom": "^21.1.7",
     "@types/node": "^22.9.0",
@@ -58,12 +54,15 @@
     "@vue/test-utils": "^2.4.6",
     "@vue/tsconfig": "^0.5.1",
     "autoprefixer": "^10.4.20",
+    "cssnano": "^7.0.6",
     "eslint": "^9.14.0",
+    "eslint-plugin-storybook": "^0.11.0",
     "eslint-plugin-vue": "^9.30.0",
     "jsdom": "^25.0.1",
     "npm-run-all2": "^7.0.1",
     "postcss": "^8.4.47",
     "prettier": "^3.3.3",
+    "storybook": "^8.4.2",
     "tailwindcss": "^3.4.14",
     "typescript": "~5.6.3",
     "vite": "^5.4.10",

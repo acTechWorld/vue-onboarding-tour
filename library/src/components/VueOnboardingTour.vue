@@ -42,12 +42,13 @@
         </div>
 
         <!-- Close Icon -->
-        <FontAwesomeIcon
-          :icon="['fas', 'xmark']"
+        <img
+          src="@/assets/icons/xmark.svg"
+          alt="Close"
           class="closeIcon absolute top-4 right-4 cursor-pointer w-5 h-5 text-gray-500 hover:text-gray-700 transition-colors"
           @click="endTour"
           data-test="closeIcon"
-        />
+        ></img>
 
         <!-- Step Title -->
         <div
@@ -68,9 +69,10 @@
         <!-- Navigation and Control -->
         <div class="navigationControls flex w-full items-center mt-4" data-test="navigationControls">
           <!-- Previous Step Icon -->
-          <FontAwesomeIcon
+          <img
             v-if="isPreviousStepEnabled"
-            :icon="['fas', 'chevron-left']"
+            src="@/assets/icons/chevron-left.svg"
+            alt="Previous"
             class="previousStepIcon mr-auto cursor-pointer text-gray-500 hover:text-gray-700 transition-colors w-4 h-4"
             @click="goPreviousStep"
             data-test="previousStepIcon"
@@ -78,10 +80,11 @@
 
           <!-- Step Indicators (Dots) -->
           <div class="stepIndicators flex flex-1 justify-center gap-2" data-test="stepIndicators">
-            <FontAwesomeIcon
+            <img
               v-for="(_, idx) in steps.length"
               :key="`dot_step_${idx}`"
-              :icon="['fas', 'circle']"
+              src="@/assets/icons/circle.svg"
+              alt="Step"
               :class="[idx === currentStepIndex ? 'text-blue-500' : 'text-gray-300', `stepIndicator_${idx}`]"
               class="cursor-pointer w-2 h-2"
               @click="setStep(idx)"
@@ -90,9 +93,10 @@
           </div>
 
           <!-- Next Step Icon / End Tour -->
-          <FontAwesomeIcon
+          <img
             v-if="isNextStepEnabled"
-            :icon="['fas', 'chevron-right']"
+            src="@/assets/icons/chevron-right.svg"
+            alt="Next"
             class="nextStepIcon ml-auto cursor-pointer text-gray-500 hover:text-gray-700 transition-colors w-4 h-4"
             @click="goNextStep"
             data-test="nextStepIcon"
@@ -114,7 +118,6 @@
 <script setup lang="ts">
 import { type MaybeElement, useElementBounding } from '@vueuse/core'
 import { ref, onMounted, watch, computed, nextTick, onUnmounted, type Ref } from 'vue'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { useCookies } from '@vueuse/integrations/useCookies'
 
 const props = withDefaults(
@@ -366,9 +369,9 @@ const checkAutoScroll = () => {
         targetTop < 0 || targetTop > window.innerHeight ? targetTop - popupPos.height - 60 : undefined
       const left = targetLeft < 0 || targetLeft > window.innerWidth ? targetLeft : undefined
       if (scrollableContainerElement.value) {
-        scrollableContainerElement.value.scrollTo({
-          left: left,
-          top: top,
+        scrollableContainerElement.value.scrollBy({
+          left: left && scrollableContainerBound.value?.left ? left - scrollableContainerBound.value?.left?.value: undefined,
+          top: top && scrollableContainerBound.value?.left ? top - scrollableContainerBound.value?.left?.value: undefined,
           behavior: 'smooth',
         })
       } else {
