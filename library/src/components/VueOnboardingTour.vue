@@ -42,13 +42,15 @@
         </div>
 
         <!-- Close Icon -->
-        <img
-          src="@/assets/icons/xmark.svg"
-          alt="Close"
-          class="closeIcon absolute top-4 right-4 cursor-pointer w-5 h-5 text-gray-500 hover:text-gray-700 transition-colors"
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          viewBox="0 0 384 512"
+          class="closeIcon absolute top-4 right-4 cursor-pointer w-5 h-5 fill-gray-500 hover:fill-gray-700 transition-colors"
           @click="endTour"
           data-test="closeIcon"
-        ></img>
+        >
+          <path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/>
+        </svg>
 
         <!-- Step Title -->
         <div
@@ -69,38 +71,44 @@
         <!-- Navigation and Control -->
         <div class="navigationControls flex w-full items-center mt-4" data-test="navigationControls">
           <!-- Previous Step Icon -->
-          <img
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            viewBox="0 0 320 512"
             v-if="isPreviousStepEnabled"
-            src="@/assets/icons/chevron-left.svg"
-            alt="Previous"
-            class="previousStepIcon mr-auto cursor-pointer text-gray-500 hover:text-gray-700 transition-colors w-4 h-4"
+            class="previousStepIcon mr-auto cursor-pointer fill-gray-500 hover:fill-gray-700 transition-colors w-4 h-4"
             @click="goPreviousStep"
             data-test="previousStepIcon"
-          />
+          >
+            <path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"/>
+          </svg>
 
           <!-- Step Indicators (Dots) -->
           <div class="stepIndicators flex flex-1 justify-center gap-2" data-test="stepIndicators">
-            <img
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              viewBox="0 0 512 512"
               v-for="(_, idx) in steps.length"
               :key="`dot_step_${idx}`"
-              src="@/assets/icons/circle.svg"
-              alt="Step"
-              :class="[idx === currentStepIndex ? 'text-blue-500' : 'text-gray-300', `stepIndicator_${idx}`]"
+              :class=" `stepIndicator_${idx}`"
               class="cursor-pointer w-2 h-2"
               @click="setStep(idx)"
               :data-test="`stepIndicator_${idx}`"
-            />
+            >
+              <path :fill="idx === currentStepIndex ? '#3b82f6' : '#d1d5db'" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z"/>
+            </svg>
           </div>
 
           <!-- Next Step Icon / End Tour -->
-          <img
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            viewBox="0 0 320 512"
             v-if="isNextStepEnabled"
-            src="@/assets/icons/chevron-right.svg"
-            alt="Next"
-            class="nextStepIcon ml-auto cursor-pointer text-gray-500 hover:text-gray-700 transition-colors w-4 h-4"
+            class="nextStepIcon ml-auto cursor-pointer fill-gray-500 hover:fill-gray-700 transition-colors w-4 h-4"
             @click="goNextStep"
             data-test="nextStepIcon"
-          />
+          >
+            <path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"/>
+          </svg>
           <span
             v-else
             class="terminateTourButton ml-auto cursor-pointer text-blue-600 hover:text-blue-800 font-medium transition-colors"
