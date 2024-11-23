@@ -15,6 +15,12 @@ export default defineConfig({
     },
   },
   build: {
+    terserOptions: {
+      compress: {
+        drop_console: true, // Remove console logs
+        drop_debugger: true,
+      },
+    },
     lib: {
       entry: path.resolve(__dirname, 'src/index.ts'), // Adjust path to index.js if needed
       name: 'VueOnboardingTour',
