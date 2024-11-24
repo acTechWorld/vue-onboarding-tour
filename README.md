@@ -2,6 +2,13 @@
 
 **VueOnboardingTour** is a Vue.js component that creates guided, step-by-step onboarding tours to help users navigate your app intuitively.
 
+## Quick Links
+- 🌐 [Live Demo](https://vueonboardingtour.actechworld.com/)  
+  Explore a live example of the component in action.
+- 📚 [Storybook Documentation](https://vueonboardingtour.storybook.actechworld.com/?path=/story/lib-components-vueonboardingtour--default)  
+  Dive into detailed component stories and configurations.
+
+
 ## Table of Contents
 
 - [Installation](#installation)
