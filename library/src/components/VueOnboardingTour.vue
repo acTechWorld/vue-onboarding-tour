@@ -12,8 +12,8 @@
     <div
       ref="popup"
       :style="stylePopup"
-      :class="[targetElementVisible ? 'fixed' : 'hidden']"
-      class="popupContainer z-[9999]"
+      :class="[targetElementVisible ? 'opacity-100' : 'opacity-0']"
+      class="popupContainer z-[9999] fixed"
       data-test="popupContainer"
     >
       <!-- Slot for Custom Content -->
@@ -22,7 +22,7 @@
       <!-- Default Template Content -->
       <div
         v-if="defaultTemplate"
-        class="defaultTemplateContent flex w-[320px] flex-col gap-4 rounded-lg bg-white p-6 shadow-lg border border-gray-200 relative"
+        class="defaultTemplateContent flex w-[320px] flex-col gap-4 rounded-lg bg-white p-6 shadow-lg border border-gray-200 relative max-w-full"
         data-test="defaultTemplateContent"
       >
         <!-- Chevron (Arrow Pointer) -->
@@ -289,6 +289,7 @@ const getStyles = () => {
       stylePopup.value = {
         top: `${targetTop - popupPos.height - 40}px`,
         left: `${targetLeft}px`,
+        width: targetLeft + popupPos.width >= window.innerWidth - 10 ? `${window.innerWidth - targetLeft -10}px` : 'auto'
       }
       popupPosition.value = 'top'
     } else {
@@ -299,6 +300,7 @@ const getStyles = () => {
             ? `${targetBottom + 40}px`
             : `${window.innerHeight - popupPos.height}px`,
         left: `${targetLeft}px`,
+        width: targetLeft + popupPos.width >= window.innerWidth - 10 ? `${window.innerWidth - targetLeft -10}px` : 'auto'
       }
       popupPosition.value = 'bottom'
     }
@@ -383,7 +385,7 @@ const checkAutoScroll = () => {
           behavior: 'smooth',
         })
       } else {
-        window.scrollTo({
+        window.scrollBy({
           left: left,
           top: top,
           behavior: 'smooth',
