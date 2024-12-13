@@ -48,14 +48,12 @@ const DefaultTemplate = (args) => ({
             </p>
             <p
               class="cursor-pointer hover:bg-purple-950 py-1"
-              @click="goToGithubPage('documentation')"
               aria-label="View online documentation for VueOnboardingTour"
             >
               Online Documentation
             </p>
             <p 
               class="cursor-pointer hover:bg-purple-950 py-1" 
-              @click="goToStoryBook" 
               aria-label="Explore VueOnboardingTour Storybook"
             >
               Storybook
@@ -141,14 +139,10 @@ const DefaultTemplate = (args) => ({
                 class="text-blue-400 leading-6 cursor-pointer hover:text-blue-600 group w-fit mx-auto relative items-center flex pr-4"
               >
                 Start with the installation guide
-                <FontAwesomeIcon
-                  class="absolute -right-2 group-hover:-right-4 transition-all"
-                  :icon="['fas', 'arrow-right']"
-                />
               </span>
             </div>
           </div>
-          <div class="bg-gradient-to-r from-red-500  via-yellow-500 to-violet-500 rounded-lg flex-1 p-[2px]" @click="goToGithubPage('documentation')">
+          <div class="bg-gradient-to-r from-red-500  via-yellow-500 to-violet-500 rounded-lg flex-1 p-[2px]">
             <div class="bg-black flex flex-col gap-5 p-5 rounded-lg h-full">
               <h2 class="text-white text-xl font-bold">Online Documentation</h2>
               <p>
@@ -159,14 +153,10 @@ const DefaultTemplate = (args) => ({
                 class="text-blue-400 leading-6 cursor-pointer hover:text-blue-600 group w-fit mx-auto relative items-center flex pr-4"
               >
                 Explore the docs
-                <FontAwesomeIcon
-                  class="absolute -right-2 group-hover:-right-4 transition-all"
-                  :icon="['fas', 'arrow-right']"
-                />
               </span>
             </div>
           </div>
-          <div class="bg-gradient-to-r from-red-500  via-yellow-500 to-violet-500 rounded-lg flex-1 p-[2px]" @click="goToStoryBook">
+          <div class="bg-gradient-to-r from-red-500  via-yellow-500 to-violet-500 rounded-lg flex-1 p-[2px]">
             <div class="bg-black flex flex-col gap-5 p-5 rounded-lg">
               <h2 class="text-white text-xl font-bold">Interactive Storybook</h2>
               <p>
@@ -177,10 +167,6 @@ const DefaultTemplate = (args) => ({
                 class="text-blue-400 leading-6 cursor-pointer hover:text-blue-600 group w-fit mx-auto relative items-center flex pr-4"
               >
                 Check out the Storybook
-                <FontAwesomeIcon
-                  class="absolute -right-2 group-hover:-right-4 transition-all"
-                  :icon="['fas', 'arrow-right']"
-                />
               </span>
             </div>
           </div>
@@ -320,7 +306,6 @@ const CustomizedTemplate = (args) => ({
             </p>
             <p 
               class="cursor-pointer hover:bg-purple-950 py-1" 
-              @click="goToStoryBook" 
               aria-label="Explore VueOnboardingTour Storybook"
             >
               Storybook
@@ -406,10 +391,6 @@ const CustomizedTemplate = (args) => ({
                 class="text-blue-400 leading-6 cursor-pointer hover:text-blue-600 group w-fit mx-auto relative items-center flex pr-4"
               >
                 Start with the installation guide
-                <FontAwesomeIcon
-                  class="absolute -right-2 group-hover:-right-4 transition-all"
-                  :icon="['fas', 'arrow-right']"
-                />
               </span>
             </div>
           </div>
@@ -424,14 +405,10 @@ const CustomizedTemplate = (args) => ({
                 class="text-blue-400 leading-6 cursor-pointer hover:text-blue-600 group w-fit mx-auto relative items-center flex pr-4"
               >
                 Explore the docs
-                <FontAwesomeIcon
-                  class="absolute -right-2 group-hover:-right-4 transition-all"
-                  :icon="['fas', 'arrow-right']"
-                />
               </span>
             </div>
           </div>
-          <div class="bg-gradient-to-r from-red-500  via-yellow-500 to-violet-500 rounded-lg flex-1 p-[2px]" @click="goToStoryBook">
+          <div class="bg-gradient-to-r from-red-500  via-yellow-500 to-violet-500 rounded-lg flex-1 p-[2px]" >
             <div class="bg-black flex flex-col gap-5 p-5 rounded-lg">
               <h2 class="text-white text-xl font-bold">Interactive Storybook</h2>
               <p>
@@ -442,10 +419,6 @@ const CustomizedTemplate = (args) => ({
                 class="text-blue-400 leading-6 cursor-pointer hover:text-blue-600 group w-fit mx-auto relative items-center flex pr-4"
               >
                 Check out the Storybook
-                <FontAwesomeIcon
-                  class="absolute -right-2 group-hover:-right-4 transition-all"
-                  :icon="['fas', 'arrow-right']"
-                />
               </span>
             </div>
           </div>

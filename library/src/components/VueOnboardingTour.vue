@@ -128,25 +128,29 @@ import { type MaybeElement, useElementBounding } from '@vueuse/core'
 import { ref, onMounted, watch, computed, nextTick, onUnmounted, type Ref } from 'vue'
 import { useCookies } from '@vueuse/integrations/useCookies'
 
+export type OnboardingTourStep = {
+  target: string
+  title: string
+  description: string
+  tag?: string
+  beforeScript?: () => void
+  afterScript?: () => void
+}
+
+export type OnboardingTourProps = {
+  tourId: string | number
+  defaultTemplate?: boolean
+  overlay?: boolean
+  startEvent?: string
+  scrollableContainerSelector?: string
+  cookieStorage?: boolean
+  endDate?: Date
+  labelTerminate?: string
+  steps: OnboardingTourStep[]
+}
+
 const props = withDefaults(
-  defineProps<{
-    tourId: string | number
-    defaultTemplate?: boolean
-    overlay?: boolean
-    startEvent?: string
-    scrollableContainerSelector?: string
-    cookieStorage?: boolean
-    endDate?: Date
-    labelTerminate?: string
-    steps: {
-      target: string
-      title: string
-      description: string
-      tag?: string
-      beforeScript?: () => void
-      afterScript?: () => void
-    }[]
-  }>(),
+  defineProps<OnboardingTourProps>(),
 
   {
     overlay: true,

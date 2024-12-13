@@ -1,21 +1,23 @@
 {
   "name": "vue-onboarding-tour",
-  "version": "0.0.3",
+  "version": "0.0.4-beta.6",
   "private": false,
   "license": "MIT",
   "type": "module",
+  "types": "./dist/types/index.d.ts",
   "publishConfig": {
     "access": "public"
   },
   "exports": {
     ".": {
       "import": "./dist/vue-onboarding-tour.es.js",
-      "require": "./dist/vue-onboarding-tour.umd.js"
+      "require": "./dist/vue-onboarding-tour.umd.js",
+      "types": "./dist/types/index.d.ts"
     }
   },
   "scripts": {
     "dev": "vite",
-    "build": "run-p type-check \"build-only {@}\" --",
+    "build": "vue-tsc --declaration --emitDeclarationOnly && vite build",
     "preview": "vite preview",
     "test:unit": "vitest --environment jsdom",
     "build-only": "vite build",
