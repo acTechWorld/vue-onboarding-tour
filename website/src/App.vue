@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { onMounted, ref } from 'vue'
-import {VueOnboardingTour} from 'vue-onboarding-tour'
 const configOnboardingTour = {
   tourId: 'tour1',
   steps: [
