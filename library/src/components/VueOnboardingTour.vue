@@ -124,6 +124,11 @@
 </template>
 
 <script setup lang="ts">
+//TODO securise v-html like dragPlayground
+//Add Footer
+//Add mygithub my linkedin
+//Add storybook actions
+//Add event in d.ts file
 import { type MaybeElement, useElementBounding } from '@vueuse/core'
 import { ref, onMounted, watch, computed, nextTick, onUnmounted, type Ref } from 'vue'
 import { useCookies } from '@vueuse/integrations/useCookies'
