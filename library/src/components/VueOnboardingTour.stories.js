@@ -4,6 +4,10 @@ export default {
   title: 'Lib/Components/VueOnboardingTour',
 
   component: VueOnboardingTour,
+  argTypes: {
+    onStartTour: { action: 'start-tour' },
+    onEndTour: { action: 'end-tour' },
+  },
 }
 
 

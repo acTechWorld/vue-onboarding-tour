@@ -1,19 +1,6 @@
 import { mount } from '@vue/test-utils'
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
+import { describe, it, expect, beforeEach, afterEach } from 'vitest'
 import VueOnboardingTour from '@/components/VueOnboardingTour.vue'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { h } from 'vue'
-
-// Mock FontAwesome Icon
-vi.mock('@fortawesome/vue-fontawesome', () => ({
-  FontAwesomeIcon: {
-    // mock the component to forward all attributes passed to it
-    render: () =>
-      h('svg', {
-        attrs: { ...this.$attrs }, // Forward all attributes to the root element (e.g., svg)
-      }),
-  },
-}))
 
 describe('VueOnboardingTour', () => {
   const sampleSteps = [
@@ -44,22 +31,6 @@ describe('VueOnboardingTour', () => {
       props: {
         ...defaultProps,
         ...props,
-      },
-      global: {
-        components: {
-          FontAwesomeIcon,
-        },
-        directives: {
-          'safe-html': {
-            // Mock the `v-safe-html` directive by just assigning innerHTML
-            beforeMount(el, binding) {
-              el.innerHTML = binding.value || ''
-            },
-            updated(el, binding) {
-              el.innerHTML = binding.value || ''
-            },
-          },
-        },
       },
     })
   }

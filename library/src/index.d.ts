@@ -22,8 +22,23 @@ export declare type OnboardingTourStep = {
   afterScript?: () => void;
 };
 
+// Define emits for custom events and v-model
+export declare type OnboardingTourEmits = {
+  'startTour': () => void
+  'endTour': () => void
+}
+
 // Declare the Vue component itself
-declare const VueOnboardingTour: DefineComponent<OnboardingTourProps>;
+declare const VueOnboardingTour: DefineComponent<
+  OnboardingTourProps, 
+  object,
+  object,
+  Record<string, never>,
+  Record<string, never>,
+  object,
+  object,
+  OnboardingTourEmits
+>;
 
 // Declare the install function for the plugin system
 declare const _default: {
@@ -35,3 +50,5 @@ export default _default;
 
 // Export the Vue component for direct use
 export { VueOnboardingTour };
+
+

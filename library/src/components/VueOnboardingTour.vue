@@ -55,7 +55,7 @@
         <!-- Step Title -->
         <div
           v-if="currentStep?.title"
-          v-safe-html="currentStep.title"
+          v-html="DOMPurify.sanitize(currentStep.title)"
           class="stepTitle text-lg font-semibold text-gray-900"
           data-test="stepTitle"
         />
@@ -63,7 +63,7 @@
         <!-- Step Description -->
         <div
           v-if="currentStep?.description"
-          v-safe-html="currentStep.description"
+          v-html="DOMPurify.sanitize(currentStep.description)"
           class="stepDescription text-sm text-gray-600 leading-relaxed"
           data-test="stepDescription"
         />
@@ -124,14 +124,10 @@
 </template>
 
 <script setup lang="ts">
-//TODO securise v-html like dragPlayground
-//Add Footer
-//Add mygithub my linkedin
-//Add storybook actions
-//Add event in d.ts file
 import { type MaybeElement, useElementBounding } from '@vueuse/core'
 import { ref, onMounted, watch, computed, nextTick, onUnmounted, type Ref } from 'vue'
 import { useCookies } from '@vueuse/integrations/useCookies'
+import DOMPurify from 'dompurify'
 
 export type OnboardingTourStep = {
   target: string
