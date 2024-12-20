@@ -1,21 +1,23 @@
 {
   "name": "vue-onboarding-tour",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "private": false,
   "license": "MIT",
   "type": "module",
+  "types": "./dist/types/index.d.ts",
   "publishConfig": {
     "access": "public"
   },
   "exports": {
     ".": {
       "import": "./dist/vue-onboarding-tour.es.js",
-      "require": "./dist/vue-onboarding-tour.umd.js"
+      "require": "./dist/vue-onboarding-tour.umd.js",
+      "types": "./dist/types/index.d.ts"
     }
   },
   "scripts": {
     "dev": "vite",
-    "build": "run-p type-check \"build-only {@}\" --",
+    "build": "vue-tsc --declaration --emitDeclarationOnly && vite build",
     "preview": "vite preview",
     "test:unit": "vitest --environment jsdom",
     "build-only": "vite build",
@@ -28,10 +30,10 @@
   "dependencies": {
     "@vueuse/core": "^11.2.0",
     "@vueuse/integrations": "^11.2.0",
+    "dompurify": "^3.2.3",
     "universal-cookie": "^7.2.2",
     "vite-plugin-dts": "^4.3.0",
-    "vue": "^3.5.12",
-    "vue-safe-html": "^3.0.1"
+    "vue": "^3.5.12"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.2",

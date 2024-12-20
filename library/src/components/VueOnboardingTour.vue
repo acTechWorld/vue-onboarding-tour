@@ -55,7 +55,7 @@
         <!-- Step Title -->
         <div
           v-if="currentStep?.title"
-          v-safe-html="currentStep.title"
+          v-html="DOMPurify.sanitize(currentStep.title)"
           class="stepTitle text-lg font-semibold text-gray-900"
           data-test="stepTitle"
         />
@@ -63,7 +63,7 @@
         <!-- Step Description -->
         <div
           v-if="currentStep?.description"
-          v-safe-html="currentStep.description"
+          v-html="DOMPurify.sanitize(currentStep.description)"
           class="stepDescription text-sm text-gray-600 leading-relaxed"
           data-test="stepDescription"
         />
@@ -127,26 +127,31 @@
 import { type MaybeElement, useElementBounding } from '@vueuse/core'
 import { ref, onMounted, watch, computed, nextTick, onUnmounted, type Ref } from 'vue'
 import { useCookies } from '@vueuse/integrations/useCookies'
+import DOMPurify from 'dompurify'
+
+export type OnboardingTourStep = {
+  target: string
+  title: string
+  description: string
+  tag?: string
+  beforeScript?: () => void
+  afterScript?: () => void
+}
+
+export type OnboardingTourProps = {
+  tourId: string | number
+  defaultTemplate?: boolean
+  overlay?: boolean
+  startEvent?: string
+  scrollableContainerSelector?: string
+  cookieStorage?: boolean
+  endDate?: Date
+  labelTerminate?: string
+  steps: OnboardingTourStep[]
+}
 
 const props = withDefaults(
-  defineProps<{
-    tourId: string | number
-    defaultTemplate?: boolean
-    overlay?: boolean
-    startEvent?: string
-    scrollableContainerSelector?: string
-    cookieStorage?: boolean
-    endDate?: Date
-    labelTerminate?: string
-    steps: {
-      target: string
-      title: string
-      description: string
-      tag?: string
-      beforeScript?: () => void
-      afterScript?: () => void
-    }[]
-  }>(),
+  defineProps<OnboardingTourProps>(),
 
   {
     overlay: true,

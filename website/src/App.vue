@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { onMounted, ref } from 'vue'
+import { VueOnboardingTour } from 'vue-onboarding-tour';
 const configOnboardingTour = {
   tourId: 'tour1',
   steps: [
@@ -65,7 +66,7 @@ onMounted(() => {
       <div 
         @mouseenter="displayDocSubMenu = true" 
         @mouseleave="displayDocSubMenu = false" 
-        @click="displayDocSubMenu = true" 
+        @click="displayDocSubMenu = !displayDocSubMenu" 
         aria-haspopup="true" 
         :aria-expanded="displayDocSubMenu" 
         aria-label="Documentation menu" 
@@ -98,6 +99,12 @@ onMounted(() => {
           >
             Storybook
           </p>
+          <a
+              class="cursor-pointer hover:bg-purple-950 py-1"
+              target="_blank"
+              href="https://www.linkedin.com/in/antoine-canard/"
+              >My Linkedin</a
+            >
         </div>
       </div>
     </nav>
@@ -226,4 +233,39 @@ onMounted(() => {
       </div>
     </div>
   </main>
+  <footer class="bg-black">
+    <div
+      class="flex gap-5 py-10 flex-col lg:!flex-row lg:justify-between text-white px-10 max-w-[1600px] mx-auto items-center"
+    >
+      <div class="flex gap-5 sm:gap-10 sm:!flex-row flex-col w-full sm:!w-auto items-center">
+        <p
+          class="cursor-pointer"
+          @click="goToGithubPage('installation')"
+          aria-label="How to install VueOnboardingTour"
+        >
+          How to install
+        </p>
+        <p
+          class="cursor-pointer"
+          @click="goToGithubPage('documentation')"
+          aria-label="View online documentation for VueOnboardingTour"
+        >
+          Online Documentation
+        </p>
+        <p
+          class="cursor-pointer"
+          @click="goToStoryBook"
+          aria-label="Explore VueOnboardingTour Storybook"
+        >
+          Storybook
+        </p>
+      </div>
+      <div class="flex gap-5 sm:gap-10 sm:!flex-row flex-col w-full sm:!w-auto items-center">
+        <a class="flex gap-10" target="_blank" href="https://www.linkedin.com/in/antoine-canard/"
+          >My Linkedin</a
+        >
+        <a class="flex gap-10" target="_blank" href="https://github.com/acTechWorld">My Github</a>
+      </div>
+    </div>
+  </footer>
 </template>

@@ -5,8 +5,13 @@
 ## Quick Links
 - 🌐 [Live Demo](https://vueonboardingtour.actechworld.com/)  
   Explore a live example of the component in action.
+- 📦 [Npm package](https://www.npmjs.com/package/vue-onboarding-tour)  
+  Here is the npm package
+  Dive into detailed component stories and configurations.
 - 📚 [Storybook Documentation](https://vueonboardingtour.storybook.actechworld.com/?path=/story/lib-components-vueonboardingtour--default)  
   Dive into detailed component stories and configurations.
+- 💼 [LinkedIn](https://www.linkedin.com/in/antoine-canard/)  
+  Here is my linkedin if you want to contact, me I'm always open for new challenges !
 
 
 ## Table of Contents
