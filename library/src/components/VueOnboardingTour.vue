@@ -372,8 +372,8 @@ const checkAutoScroll = () => {
     document.querySelector(currentStep.value?.target)?.getBoundingClientRect() ?? {}
     const popupPos = popup.value?.getBoundingClientRect()
     if (
-      targetTop &&
-      targetLeft &&
+      targetTop !== undefined &&
+      targetLeft !== undefined &&
       popupPos &&
       (targetTop < 0 ||
         targetTop > window.innerHeight ||
