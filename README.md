@@ -136,6 +136,18 @@ The `VueOnboardingTour` component allows for creating an interactive, step-by-st
   <VueOnboardingTour :tourId="123" :steps="steps" :overlay="false" />
   ```
 
+#### `startTour`
+
+- **Type:** `Boolean`
+- **Default:** `false`
+- **Description:** Start the tour if setted to true.
+
+  **Usage:**
+
+  ```html
+  <VueOnboardingTour :tourId="123" :steps="steps" :startTour="true" />
+  ```
+
 #### `startEvent`
 
 - **Type:** `String`
