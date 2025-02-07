@@ -5,6 +5,7 @@ export declare type OnboardingTourProps = {
   tourId: string | number;
   defaultTemplate?: boolean;
   overlay?: boolean;
+  startTour?: boolean;
   startEvent?: string;
   scrollableContainerSelector?: string;
   cookieStorage?: boolean;

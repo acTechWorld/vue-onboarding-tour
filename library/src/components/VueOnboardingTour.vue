@@ -142,6 +142,7 @@ export type OnboardingTourProps = {
   tourId: string | number
   defaultTemplate?: boolean
   overlay?: boolean
+  startTour?: boolean
   startEvent?: string
   scrollableContainerSelector?: string
   cookieStorage?: boolean
@@ -157,6 +158,7 @@ const props = withDefaults(
     overlay: true,
     cookieStorage: false,
     defaultTemplate: true,
+    startTour: false,
     startEvent: undefined,
     endDate: undefined,
     scrollableContainerSelector: undefined,
@@ -519,5 +521,9 @@ watch(targetElement, () => {
       checkAutoScroll()
     })
   }
+})
+
+watch(() => props.startTour, () => {
+  if(props.startTour) startTour()
 })
 </script>
