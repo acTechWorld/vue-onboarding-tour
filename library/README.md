@@ -22,6 +22,7 @@
     - [tourId](#tourid)
     - [defaultTemplate](#defaulttemplate)
     - [overlay](#overlay)
+    - [startTour](#starttour)
     - [startEvent](#startevent)
     - [scrollableContainerSelector](#scrollablecontainerselector)
     - [cookieStorage](#cookiestorage)
