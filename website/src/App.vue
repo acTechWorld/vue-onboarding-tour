@@ -108,7 +108,7 @@ onMounted(() => {
         </div>
       </div>
     </nav>
-    <VueOnboardingTour v-bind="configOnboardingTour" ref="onboardingTourPoppin" aria-label="Interactive onboarding tour for Vue application"/>
+    <VueOnboardingTour v-bind="configOnboardingTour" :star ref="onboardingTourPoppin" aria-label="Interactive onboarding tour for Vue application"/>
     <div class="lg:max-w-[1200px] mx-auto px-10 py-[10rem] relative">
       <div
         class="text-4xl md:text-5xl lg:text-6xl font-medium text-white text-balance py-2 text-center break-words"
