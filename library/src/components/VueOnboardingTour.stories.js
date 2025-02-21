@@ -232,6 +232,12 @@ Default.args = {
         console.log('after moving step')
       },
     },
+    {
+      target: '',
+      title: 'No Target',
+      description:
+        'If no target given it will put the popup at the middle of the screen',
+    },
   ],
 }
 
