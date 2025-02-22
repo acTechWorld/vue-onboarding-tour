@@ -7,7 +7,7 @@
 import { type App } from 'vue'
 import VueOnboardingTour from './components/VueOnboardingTour.vue'
 // @ts-ignore
-import './assets/main.css'
+import './assets/index.css'
 
 export type { OnboardingTourProps } from './components/VueOnboardingTour.vue'
 // Install function for the plugin system
