@@ -27,6 +27,7 @@
       >
         <!-- Chevron (Arrow Pointer) -->
         <span
+          v-if="currentStep?.target"
           class="chevronPointer w-4 h-4 absolute bg-white rotate-45"
           :class="styleChevron"
           data-test="chevronPointer"
@@ -83,7 +84,7 @@
           </svg>
 
           <!-- Step Indicators (Dots) -->
-          <div class="stepIndicators flex flex-1 justify-center gap-2" data-test="stepIndicators">
+          <div v-if="steps.length > 1" class="stepIndicators flex flex-1 justify-center gap-2" data-test="stepIndicators">
             <svg 
               xmlns="http://www.w3.org/2000/svg" 
               viewBox="0 0 512 512"
@@ -130,7 +131,7 @@ import { useCookies } from '@vueuse/integrations/useCookies'
 import DOMPurify from 'dompurify'
 
 export type OnboardingTourStep = {
-  target: string
+  target?: string
   title: string
   description: string
   tag?: string
@@ -177,6 +178,8 @@ const styleOverlay = ref({})
 const popupPosition = ref('left')
 
 const popup: Ref<HTMLDivElement | null> = ref(null)
+
+let fakeElement: HTMLElement | null = null; // Store fake element reference
 
 const cookies = useCookies()
 
@@ -311,6 +314,21 @@ const getStyles = () => {
       }
       popupPosition.value = 'bottom'
     }
+  } else if(popupPos){
+    // Centering the popup if no target is provided
+    stylePopup.value = {
+      top: `${(window.innerHeight - popupPos.height) / 2}px`,
+      left: `${(window.innerWidth - popupPos.width) / 2}px`,
+      position: 'fixed',
+    };
+
+    styleOverlay.value = {
+      position: 'fixed',
+      boxShadow: 'inset 0px 0px 10px 0px rgba(255, 255, 255, 1), 0px 0px 0px 9999px rgba(0, 0, 0, 0.5)',
+      userEvent: 'none',
+      borderRadius: '10px',
+      zIndex: 9999,
+    }
   }
 }
 
@@ -365,6 +383,10 @@ const endTour = () => {
   stylePopup.value = {}
   styleOverlay.value = {}
   targetElement.value = null
+  if (fakeElement) {
+    fakeElement.remove();
+    fakeElement = null;
+  }
   emits('endTour')
 }
 
@@ -403,6 +425,10 @@ const checkAutoScroll = () => {
 }
 
 const getTargetElement = () => {
+  if (fakeElement) {
+    fakeElement.remove();
+    fakeElement = null;
+  }
   if(currentStep.value?.target) {
     //Add observer to wait for dom generation if element not directly in DOM
     if (document.querySelector(currentStep.value?.target)) {
@@ -424,6 +450,17 @@ const getTargetElement = () => {
 
       domObserverTarget.observe(targetNode, config) // Start observing
     }
+  } else {
+    fakeElement = document.createElement("div");
+    fakeElement.style.position = "fixed";
+    fakeElement.style.top = "50%";
+    fakeElement.style.left = "50%";
+    fakeElement.style.width = "0px";
+    fakeElement.style.height = "0px";
+    fakeElement.style.transform = "translate(-50%, -50%)";
+    document.body.appendChild(fakeElement);
+
+    targetElement.value = fakeElement;
   }
 }
 
