@@ -271,7 +271,7 @@ In this example, the `ParentComponent` contains a button that triggers the `star
 - **Required:** `true`
 - **Description:** An array of objects defining each step in the tour. Each step object has the following fields:
 
-  - `target` (String): A CSS selector for the element to highlight.
+  - `target` (String, optional): A CSS selector for the element to highlight **If not provided, the popup will be displayed in the center of the screen, without highliting any component**.
   - `title` (String, optional): The title text for the step.
   - `description` (String, optional): A description for the step.
   - `tag` (String, optional): Additional text or label to be shown in the step (e.g., a category or type label).
