@@ -15,7 +15,7 @@ export declare type OnboardingTourProps = {
 };
 
 export declare type OnboardingTourStep = {
-  target: string;
+  target?: string
   title: string;
   description: string;
   tag?: string;
