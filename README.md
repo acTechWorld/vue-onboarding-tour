@@ -280,6 +280,7 @@ In this example, the `ParentComponent` contains a button that triggers the `star
   - `tag` (String, optional): Additional text or label to be shown in the step (e.g., a category or type label).
   - `beforeScript` (Function, optional): A function to be executed before showing the step.
   - `afterScript` (Function, optional): A function to be executed after displaying the step.
+  - `disable` (Boolean optional): Disable step to be part of the tour
 
   **Example Steps Array:**
 
