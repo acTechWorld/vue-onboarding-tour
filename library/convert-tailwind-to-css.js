@@ -10,6 +10,8 @@ const indentSpaces = 2;
 // Generated CSS output file
 const outputCSS = './src/assets/index.css';
 
+const ignoreList = ['filter', 'map', 'reduce', 'find', 'push', 'pop', 'shift', 'unshift'];
+
 // Convert Tailwind CSS to native CSS
 postcss([ 
   tailwindcss({
@@ -29,6 +31,13 @@ postcss([
     let formattedCSS = result.css
       .replaceAll(' '.repeat(4), ' '.repeat(indentSpaces)) // Handle indentation
       .replace(/([^{;\s]+:[^;}]+)(\s*?)\n(\s*})/g, '$1;\n$3'); // Insert semicolon before newline and closing brace, preserving indentation
+
+      // Filter out ignored classes
+    ignoreList.forEach(className => {
+      // Remove the CSS block for the ignored class
+      const classRegex = new RegExp(`\\.${className}\\s*{[^}]*}`, 'g');
+      formattedCSS = formattedCSS.replace(classRegex, '');
+    });
 
     //Init all tailwind vars
     formattedCSS = `${formattedCSS} 
