@@ -84,11 +84,11 @@
           </svg>
 
           <!-- Step Indicators (Dots) -->
-          <div v-if="steps.length > 1" class="stepIndicators flex flex-1 justify-center gap-2" data-test="stepIndicators">
+          <div v-if="displayedSteps.length > 1" class="stepIndicators flex flex-1 justify-center gap-2" data-test="stepIndicators">
             <svg 
               xmlns="http://www.w3.org/2000/svg" 
               viewBox="0 0 512 512"
-              v-for="(_, idx) in steps.length"
+              v-for="(_, idx) in displayedSteps.length"
               :key="`dot_step_${idx}`"
               :class=" `stepIndicator_${idx}`"
               class="cursor-pointer w-2 h-2"
@@ -135,6 +135,7 @@ export type OnboardingTourStep = {
   title: string
   description: string
   tag?: string
+  disable?: boolean
   beforeScript?: () => void
   afterScript?: () => void
 }
@@ -192,8 +193,10 @@ const targetElement: Ref<Element | null> = ref(null)
 const scrollableContainerElement: Ref<Element | null> = ref(null)
 
 /** COMPUTED */
+const displayedSteps = computed(() => props.steps.filter(step => !step.disable))
+
 const currentStep = computed(() =>
-  props.steps?.length > 0 ? props.steps[currentStepIndex.value] : undefined,
+  displayedSteps.value?.length > 0 ? displayedSteps.value[currentStepIndex.value] : undefined,
 )
 
 const targetElementBound = computed(() => useElementBounding(targetElement.value as MaybeElement))
@@ -235,12 +238,12 @@ const styleChevron = computed(() => {
   }
 })
 
-const isNextStepEnabled = computed(() => currentStepIndex.value < props.steps?.length - 1)
+const isNextStepEnabled = computed(() => currentStepIndex.value < displayedSteps.value?.length - 1)
 
 const isPreviousStepEnabled = computed(() => currentStepIndex.value > 0)
 
 const displayOnboardingTour = computed(
-  () => displayTour.value && props.steps && props.steps.length > 0 && targetElement.value,
+  () => displayTour.value && displayedSteps.value && displayedSteps.value.length > 0 && targetElement.value,
 )
 
 /** METHODS */
@@ -333,7 +336,7 @@ const getStyles = () => {
 }
 
 const goNextStep = () => {
-  if (currentStepIndex.value < props.steps?.length - 1) currentStepIndex.value += 1
+  if (currentStepIndex.value < displayedSteps.value?.length - 1) currentStepIndex.value += 1
 }
 
 const goPreviousStep = () => {
@@ -341,7 +344,7 @@ const goPreviousStep = () => {
 }
 
 const setStep = (index: number) => {
-  if (index >= 0 && index <= props.steps?.length) currentStepIndex.value = index
+  if (index >= 0 && index <= displayedSteps.value?.length) currentStepIndex.value = index
 }
 
 const validateStartTour = () => {

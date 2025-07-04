@@ -238,6 +238,11 @@ Default.args = {
       description:
         'If no target given it will put the popup at the middle of the screen',
     },
+    {
+      target: '',
+      title: 'Disabled Step',
+      disable: true,
+    },
   ],
 }
 
