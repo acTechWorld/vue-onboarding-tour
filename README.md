@@ -29,9 +29,12 @@
     - [endDate](#enddate)
     - [labelTerminate](#labelterminate)
     - [steps](#steps)
+  - [All Events](#all-events)
+    - [startTour](#starttour-event)
+    - [endTour](#endtour-event)
   - [Exposed Methods](#exposed-methods)
-    - [startTour()](#starttour)
-    - [endTour()](#endtour)
+    - [startTour()](#starttour-method)
+    - [endTour()](#endtour-method)
     - [goNextStep()](#gonextstep)
     - [goPreviousStep()](#gopreviousstep)
     - [setStep(index)](#setstepindex)
@@ -305,9 +308,45 @@ In this example, the `ParentComponent` contains a button that triggers the `star
   <VueOnboardingTour :tourId="123" :steps="steps" />
   ```
 
+## All Events
+
+`VueOnboardingTour` emits several events that allow you to track the tour’s progress and trigger custom behavior at key moments.
+
+### `startTour Event`
+- **Emitted when:** The tour starts (either programmatically or via `startEvent`).
+- **Payload:** None.
+
+**Example:**
+```html
+<VueOnboardingTour @startTour="handleStart" />
+```
+```javascript
+methods: {
+  handleStart() {
+    console.log('The tour has started.')
+  }
+}
+```
+
+### `endTour Event`
+- **Emitted when:** The tour ends, either by reaching the last step or by calling endTour().
+- **Payload:** None.
+
+**Example:**
+```html
+<VueOnboardingTour @endTour="handleEnd" />
+```
+```javascript
+methods: {
+  handleEnd() {
+    console.log('The tour has ended.')
+  }
+}
+```
+
 ## Exposed Methods
 
-### `startTour()`
+### `startTour Method`
 
 **Purpose:**  
 Starts the onboarding tour programmatically.
@@ -321,7 +360,7 @@ e.g., after a button click or other user action.
 this.$refs.onboardingTour.startTour()
 ```
 
-### `endTour()`
+### `endTour Method`
 
 **Purpose:**  
 Ends the onboarding tour programmatically.
