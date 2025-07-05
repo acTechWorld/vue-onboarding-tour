@@ -39,6 +39,13 @@ const configOnboardingTour = {
         'Need help getting started or looking for advanced features? Our comprehensive documentation provides everything you need to make the most of VueOnboardingTour.',
       tag: 'Documentation',
     },
+     {
+      target: '',
+      title: 'Disable',
+      description: '',
+      tag: 'Documentation',
+      disable: true,
+    },
   ],
 }
 const onboardingTourPoppin = ref(null)
@@ -56,7 +63,9 @@ const goToStoryBook = () => {
 }
 /** LIFECYCLE */
 onMounted(() => {
-  onboardingTourPoppin.value?.startTour()
+  if(onboardingTourPoppin.value) {
+      (onboardingTourPoppin.value as typeof VueOnboardingTour)?.startTour()
+  }
 })
 </script>
 
