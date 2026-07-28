@@ -33,9 +33,10 @@ postcss([
       formattedCSS = formattedCSS.replace(classRegex, '');
     });
 
-    //Init all tailwind vars
+    //Init all tailwind vars on the library's own elements only, so the
+    //reset cannot override the host app's Tailwind utilities (see #34)
     formattedCSS = `${formattedCSS} 
-*, ::before, ::after {
+[class*="vot-"], [class*="vot-"]::before, [class*="vot-"]::after {
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
   --tw-translate-x: 0;

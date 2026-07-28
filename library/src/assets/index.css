@@ -166,7 +166,7 @@
   --tw-text-opacity: 1;
   color: rgb(30 64 175 / var(--tw-text-opacity, 1));
 } 
-*, ::before, ::after {
+[class*="vot-"], [class*="vot-"]::before, [class*="vot-"]::after {
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
   --tw-translate-x: 0;
